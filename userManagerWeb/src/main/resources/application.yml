@@ -1,0 +1,41 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /userManagerWeb
+
+spring:
+  servlet:
+    multipart:
+      #默认可以上传5M
+      maxFileSize: 5MB
+      maxRequestSize: 5MB
+  application:
+    name: USER-MANAGER-WEB
+  main:
+    allow-bean-definition-overriding: true
+
+#所有接口的默认前缀
+urlHead: '/api'
+
+#日志配置
+logging:
+
+#eureka注册中心
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: 
+  server:
+    eviction-interval-timer-in-ms: 2000  #剔除失效服务间隔
+#负载均衡
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000 #连接超时
+        readTimeout: 5000 #读取超时
+        loggerLevel: basic #日志等级
+  httpclient:
+    enabled: true
+  okhttp:
+    enabled: true

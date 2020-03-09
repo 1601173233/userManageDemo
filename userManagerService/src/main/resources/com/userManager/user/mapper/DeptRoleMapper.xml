@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.userManager.user.mapper.DeptRoleMapper" >
+    <resultMap id="BaseResultMap" type="com.userManager.user.entity.DeptRole" >
+            <result column="ID" property="id" jdbcType="INTEGER" />
+            <result column="DEPT_ID" property="deptId" jdbcType="INTEGER" />
+            <result column="NAME" property="name" jdbcType="VARCHAR" />
+            <result column="DEL_FLAG" property="delFlag" jdbcType="INTEGER" />
+            <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+            <result column="CREATOR" property="creator" jdbcType="INTEGER" />
+            <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+            <result column="MODIFIER" property="modifier" jdbcType="INTEGER" />
+    </resultMap>
+
+    <!-- 定义查询的字段 -->
+    <sql id="Base_Column_List" >
+            A.ID,
+            A.DEPT_ID,
+            A.NAME,
+            A.DEL_FLAG,
+            A.CREATE_TIME,
+            A.CREATOR,
+            A.UPDATE_TIME,
+            A.MODIFIER
+    </sql>
+
+    <select id="getListByIdList" parameterType="list" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+          FROM DEPT_ROLE A
+         WHERE ID IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        AND FLAG = ${@com.suntek.Ognl@getFalseType()}
+    </select>
+</mapper>

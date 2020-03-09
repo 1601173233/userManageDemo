@@ -1,0 +1,31 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///test?useUnicode=true&characterEncoding=utf8&useSSL=false&useJDBCCompliantTimezoneShift&serverTimezone=Hongkong&allowMultiQueries=true
+    username: 
+    password: 
+  servlet:
+    multipart:
+      #默认可以上传5M
+      maxFileSize: 5MB
+      maxRequestSize: 5MB
+  application:
+    name: USER-MANAGER-SERVER
+
+#日志配置
+logging:
+  level:
+    com.userManager: debug
+
+#MyabtisPlus查询注册
+mybatis-plus:
+  typeAliasesPackage: com.base.common.mybatics.handler
+
+#eureka注册中心
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: 
