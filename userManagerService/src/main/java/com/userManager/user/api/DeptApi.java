@@ -3,15 +3,14 @@ package com.userManager.user.api;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
 import com.userManager.user.entity.Dept;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 部门对外接口
  *
  * @author : huangyujie
- * @version : 2020年03月09日
+ * @version : 2020年03月10日
  * @since
  */
 public interface DeptApi{

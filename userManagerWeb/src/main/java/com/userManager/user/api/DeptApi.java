@@ -12,7 +12,7 @@ import java.util.List;
  * 部门对外接口
  *
  * @author : huangyujie
- * @version : 2020年03月09日
+ * @version : 2020年03月10日
  * @since
  */
 @FeignClient(name = "USER-MANAGER-SERVER")
@@ -22,7 +22,7 @@ public interface DeptApi{
      * @param id
      * @return
      */
-    @RequestLine(value = "GET /innerApi/deptApi/getById")
+    @RequestLine(value = "GET /innerApi/user/deptApi/getById")
     Dept getById(@Param("id") String id);
 
     /**
@@ -30,7 +30,7 @@ public interface DeptApi{
      * @param id
      * @return
      */
-    @RequestLine(value = "DELETE /innerApi/deptApi/removeById")
+    @RequestLine(value = "DELETE /innerApi/user/deptApi/removeById")
     boolean removeById(@Param("id") String id);
 
     /**
@@ -38,7 +38,7 @@ public interface DeptApi{
      * @param dept 部门信息
      * @return
      */
-    @RequestLine(value = "PUT /innerApi/deptApi/save")
+    @RequestLine(value = "PUT /innerApi/user/deptApi/save")
     boolean save(@Param("dept") Dept dept);
 
     /**
@@ -46,7 +46,7 @@ public interface DeptApi{
      * @param dept 部门信息
      * @return
      */
-    @RequestLine(value = "POST /innerApi/deptApi/updateById")
+    @RequestLine(value = "POST /innerApi/user/deptApi/updateById")
     boolean updateById(@Param("dept") Dept dept);
 
     /**
@@ -54,7 +54,7 @@ public interface DeptApi{
      * @param dept 部门信息
      * @return
      */
-    @RequestLine(value = "GET /innerApi/deptApi/selectOne")
+    @RequestLine(value = "GET /innerApi/user/deptApi/selectOne")
     Dept selectOne(@Param("dept") Dept dept);
 
     /**
@@ -62,7 +62,7 @@ public interface DeptApi{
      * @param dept 部门信息
      * @return
      */
-    @RequestLine(value = "GET /innerApi/deptApi/select")
+    @RequestLine(value = "GET /innerApi/user/deptApi/select")
     List<Dept> select(@Param("dept") Dept dept);
 
     /**
@@ -70,6 +70,6 @@ public interface DeptApi{
      * @param pageParamsVo 分页参数
      * @return
      */
-    @RequestLine(value = "GET /innerApi/deptApi/getPage")
+    @RequestLine(value = "GET /innerApi/user/deptApi/getPage")
     PageResultVo<Dept> getPage(@Param("dept") Dept dept, @Param("pageParamsVo") PageParamsVo pageParamsVo);
 }

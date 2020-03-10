@@ -4,13 +4,14 @@ import com.base.common.entity.BaseModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
 import java.util.Date;
 
 /**
  * 部门
  *
  * @author : huangyujie
- * @version : 2020年03月06日
+ * @version : 2020年03月10日
  * @since
  */
 @Data
@@ -27,6 +28,14 @@ public class Dept extends BaseModel{
     /** 图标名称 */
     @ApiModelProperty(value="图标名称")
     private String icon;
+
+    /** 父部门ID */
+    @ApiModelProperty(value="父部门ID")
+    private Integer parentId;
+
+    /** 所属行政区ID */
+    @ApiModelProperty(value="所属行政区ID")
+    private Integer districtId;
 
     /** 删除标志（0：未删除，1：已删除） */
     @ApiModelProperty(value="删除标志（0：未删除，1：已删除）")

@@ -1,16 +1,18 @@
 package com.userManager.user.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.base.common.entity.BaseModel;
 import lombok.Data;
-
 import java.util.Date;
-
 /**
  * 部门
  *
  * @author : huangyujie
- * @version : 2020年03月06日
+ * @version : 2020年03月10日
  * @since
  */
 @Data
@@ -28,6 +30,14 @@ public class Dept extends BaseModel{
     /** 图标名称 */
     @TableField("ICON")
     private String icon;
+
+    /** 父部门ID */
+    @TableField("PARENT_ID")
+    private Integer parentId;
+
+    /** 所属行政区ID */
+    @TableField("DISTRICT_ID")
+    private Integer districtId;
 
     /** 删除标志（0：未删除，1：已删除） */
     @TableLogic(value = "0", delval = "1")

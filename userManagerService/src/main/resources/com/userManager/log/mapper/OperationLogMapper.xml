@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.userManager.log.mapper.OperationLogMapper" >
+    <resultMap id="BaseResultMap" type="com.userManager.log.entity.OperationLog" >
+            <result column="ID" property="id" jdbcType="INTEGER" />
+            <result column="AUTH_ID" property="subjectId" jdbcType="VARCHAR" />
+            <result column="USER_ID" property="operatedId" jdbcType="INTEGER" />
+            <result column="OPERATION_TYPE" property="operationType" jdbcType="INTEGER" />
+            <result column="DEL_FLAG" property="delFlag" jdbcType="INTEGER" />
+            <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+            <result column="CREATOR" property="creator" jdbcType="INTEGER" />
+            <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+            <result column="MODIFIER" property="modifier" jdbcType="INTEGER" />
+    </resultMap>
+
+    <!-- 定义查询的字段 -->
+    <sql id="Base_Column_List" >
+            A.ID,
+            A.AUTH_ID,
+            A.USER_ID,
+            A.OPERATION_TYPE,
+            A.DEL_FLAG,
+            A.CREATE_TIME,
+            A.CREATOR,
+            A.UPDATE_TIME,
+            A.MODIFIER
+    </sql>
+
+    <select id="getListByIdList" parameterType="list" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+          FROM OPERATION_LOG A
+         WHERE ID IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        AND FLAG = ${@com.suntek.Ognl@getFalseType()}
+    </select>
+</mapper>

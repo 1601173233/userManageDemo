@@ -5,6 +5,8 @@
             <result column="ID" property="id" jdbcType="INTEGER" />
             <result column="NAME" property="name" jdbcType="VARCHAR" />
             <result column="ICON" property="icon" jdbcType="VARCHAR" />
+            <result column="PARENT_ID" property="parentId" jdbcType="INTEGER" />
+            <result column="DISTRICT_ID" property="districtId" jdbcType="INTEGER" />
             <result column="DEL_FLAG" property="delFlag" jdbcType="INTEGER" />
             <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
             <result column="CREATOR" property="creator" jdbcType="INTEGER" />
@@ -17,6 +19,8 @@
             A.ID,
             A.NAME,
             A.ICON,
+            A.PARENT_ID,
+            A.DISTRICT_ID,
             A.DEL_FLAG,
             A.CREATE_TIME,
             A.CREATOR,

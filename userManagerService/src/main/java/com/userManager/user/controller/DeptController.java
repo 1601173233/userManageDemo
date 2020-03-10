@@ -14,7 +14,7 @@ import java.util.List;
  * 部门表服务控制层
  *
  * @author : huangyujie
- * @version : 2020年03月09日
+ * @version : 2020年03月10日
  * @since
  */
 @RestController
@@ -24,13 +24,13 @@ public class DeptController implements DeptApi {
      * 部门管理服务
      */
     @Autowired
-    DeptService deptApi;
+    DeptService deptService;
 
     @Override
     public Dept getById(String id){
         log.info("根据 id 获取部门信息");
 
-        Dept result = deptApi.getById(id);
+        Dept result = deptService.getById(id);
 
         // 根据id获取记录
         return result;
@@ -41,7 +41,7 @@ public class DeptController implements DeptApi {
         log.info("根据 id 删除部门信息");
 
         // 删除对应的记录
-        boolean result = deptApi.removeById(id);
+        boolean result = deptService.removeById(id);
 
         return result;
     }
@@ -51,7 +51,7 @@ public class DeptController implements DeptApi {
         log.info("新增部门信息");
 
         // 新增一条记录
-        boolean result = deptApi.save(dept);
+        boolean result = deptService.save(dept);
 
         return result;
     }
@@ -61,7 +61,7 @@ public class DeptController implements DeptApi {
         log.info("更新部门信息");
 
         // 新增一条记录
-        boolean result = deptApi.updateById(dept);
+        boolean result = deptService.updateById(dept);
 
         return result;
     }
@@ -71,7 +71,7 @@ public class DeptController implements DeptApi {
         log.info("根据信息获取部门信息单个对象");
 
         // 根据信息获取部门信息列表
-        Dept entity = deptApi.selectOne(dept);
+        Dept entity = deptService.selectOne(dept);
 
         return entity;
     }
@@ -81,7 +81,7 @@ public class DeptController implements DeptApi {
         log.info("根据信息获取部门信息列表");
 
         // 根据信息获取部门信息列表
-        List<Dept> list = deptApi.select(dept);
+        List<Dept> list = deptService.select(dept);
 
         return list;
     }
@@ -91,7 +91,7 @@ public class DeptController implements DeptApi {
         log.info("根据信息获取部门分页信息");
 
         // 根据信息获取部门分页信息
-        PageResultVo<Dept> page = deptApi.getPage(dept, pageParamsVo);
+        PageResultVo<Dept> page = deptService.getPage(dept, pageParamsVo);
 
         return page;
     }

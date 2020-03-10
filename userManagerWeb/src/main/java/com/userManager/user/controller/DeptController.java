@@ -20,7 +20,7 @@ import java.util.List;
  * 部门表控制层
  *
  * @author : huangyujie
- * @version : 2020年03月09日
+ * @version : 2020年03月10日
  * @since
  */
 @RequestMapping("${urlHead}/dept")

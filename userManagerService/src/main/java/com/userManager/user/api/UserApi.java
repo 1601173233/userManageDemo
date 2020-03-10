@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * 用户对外接口
  *
  * @author : huangyujie
- * @version : 2020年03月09日
+ * @version : 2020年03月10日
  * @since
  */
 public interface UserApi{

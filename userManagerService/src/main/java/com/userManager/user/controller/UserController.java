@@ -14,7 +14,7 @@ import java.util.List;
  * 用户表服务控制层
  *
  * @author : huangyujie
- * @version : 2020年03月09日
+ * @version : 2020年03月10日
  * @since
  */
 @RestController
@@ -24,13 +24,13 @@ public class UserController implements UserApi {
      * 用户管理服务
      */
     @Autowired
-    UserService userApi;
+    UserService userService;
 
     @Override
     public User getById(String id){
         log.info("根据 id 获取用户信息");
 
-        User result = userApi.getById(id);
+        User result = userService.getById(id);
 
         // 根据id获取记录
         return result;
@@ -41,7 +41,7 @@ public class UserController implements UserApi {
         log.info("根据 id 删除用户信息");
 
         // 删除对应的记录
-        boolean result = userApi.removeById(id);
+        boolean result = userService.removeById(id);
 
         return result;
     }
@@ -51,7 +51,7 @@ public class UserController implements UserApi {
         log.info("新增用户信息");
 
         // 新增一条记录
-        boolean result = userApi.save(user);
+        boolean result = userService.save(user);
 
         return result;
     }
@@ -61,7 +61,7 @@ public class UserController implements UserApi {
         log.info("更新用户信息");
 
         // 新增一条记录
-        boolean result = userApi.updateById(user);
+        boolean result = userService.updateById(user);
 
         return result;
     }
@@ -71,7 +71,7 @@ public class UserController implements UserApi {
         log.info("根据信息获取用户信息单个对象");
 
         // 根据信息获取用户信息列表
-        User entity = userApi.selectOne(user);
+        User entity = userService.selectOne(user);
 
         return entity;
     }
@@ -81,7 +81,7 @@ public class UserController implements UserApi {
         log.info("根据信息获取用户信息列表");
 
         // 根据信息获取用户信息列表
-        List<User> list = userApi.select(user);
+        List<User> list = userService.select(user);
 
         return list;
     }
@@ -91,7 +91,7 @@ public class UserController implements UserApi {
         log.info("根据信息获取用户分页信息");
 
         // 根据信息获取用户分页信息
-        PageResultVo<User> page = userApi.getPage(user, pageParamsVo);
+        PageResultVo<User> page = userService.getPage(user, pageParamsVo);
 
         return page;
     }
