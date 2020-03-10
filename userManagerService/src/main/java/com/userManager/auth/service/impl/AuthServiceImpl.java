@@ -1,9 +1,9 @@
-package com.userManagerauth.service.impl;
+package com.userManager.auth.service.impl;
 
 import com.base.common.service.impl.BaseServiceImpl;
-import com.userManagerauth.entity.Auth;
-import com.userManagerauth.mapper.AuthMapper;
-import com.userManagerauth.service.AuthService;
+import com.userManager.auth.entity.Auth;
+import com.userManager.auth.mapper.AuthMapper;
+import com.userManager.auth.service.AuthService;
 import com.base.common.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 

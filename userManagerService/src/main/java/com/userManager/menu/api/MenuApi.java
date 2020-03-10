@@ -3,8 +3,9 @@ package com.userManager.menu.api;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
 import com.userManager.menu.entity.Menu;
-import java.util.List;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 菜单对外接口
@@ -19,7 +20,7 @@ public interface MenuApi{
      * @param id
      * @return
      */
-    @GetMapping(value = "/innerApi/menuApi/getById")
+    @GetMapping(value = "/innerApi/menu/menuApi/getById")
     Menu getById(String id);
 
     /**
@@ -27,7 +28,7 @@ public interface MenuApi{
      * @param id
      * @return
      */
-    @DeleteMapping(value = "/innerApi/menuApi/removeById")
+    @DeleteMapping(value = "/innerApi/menu/menuApi/removeById")
     boolean removeById(String id);
 
     /**
@@ -35,7 +36,7 @@ public interface MenuApi{
      * @param menu 菜单信息
      * @return
      */
-    @PutMapping(value = "/innerApi/menuApi/save")
+    @PutMapping(value = "/innerApi/menu/menuApi/save")
     boolean save(@RequestPart("menu") Menu menu);
 
     /**
@@ -43,7 +44,7 @@ public interface MenuApi{
      * @param menu 菜单信息
      * @return
      */
-    @PostMapping(value = "/innerApi/menuApi/updateById")
+    @PostMapping(value = "/innerApi/menu/menuApi/updateById")
     boolean updateById(@RequestPart("menu") Menu menu);
 
     /**
@@ -51,7 +52,7 @@ public interface MenuApi{
      * @param menu 菜单信息
      * @return
      */
-    @GetMapping(value = "/innerApi/menuApi/selectOne")
+    @GetMapping(value = "/innerApi/menu/menuApi/selectOne")
     Menu selectOne(@RequestPart("menu") Menu menu);
 
     /**
@@ -59,7 +60,7 @@ public interface MenuApi{
      * @param menu 菜单信息
      * @return
      */
-    @GetMapping(value = "/innerApi/menuApi/select")
+    @GetMapping(value = "/innerApi/menu/menuApi/select")
     List<Menu> select(@RequestPart("menu") Menu menu);
 
     /**
@@ -67,7 +68,7 @@ public interface MenuApi{
      * @param pageParamsVo 分页参数
      * @return
      */
-    @GetMapping(value = "/innerApi/menuApi/getPage")
+    @GetMapping(value = "/innerApi/menu/menuApi/getPage")
     PageResultVo<Menu> getPage(@RequestPart("menu") Menu menu,
                                             @RequestPart("pageParamsVo") PageParamsVo pageParamsVo);
 }

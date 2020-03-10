@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.userManagerauth.mapper.RoleAuthMapper" >
-    <resultMap id="BaseResultMap" type="com.userManagerauth.entity.RoleAuth" >
+<mapper namespace="com.userManager.auth.mapper.RoleAuthMapper" >
+    <resultMap id="BaseResultMap" type="com.userManager.auth.entity.RoleAuth" >
             <result column="AUTH_ID" property="authId" jdbcType="INTEGER" />
             <result column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
     </resultMap>

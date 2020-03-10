@@ -3,8 +3,9 @@ package com.userManager.dict.api;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
 import com.userManager.dict.entity.Dict;
-import java.util.List;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 字典对外接口
@@ -19,7 +20,7 @@ public interface DictApi{
      * @param id
      * @return
      */
-    @GetMapping(value = "/innerApi/dictApi/getById")
+    @GetMapping(value = "/innerApi/dict/dictApi/getById")
     Dict getById(String id);
 
     /**
@@ -27,7 +28,7 @@ public interface DictApi{
      * @param id
      * @return
      */
-    @DeleteMapping(value = "/innerApi/dictApi/removeById")
+    @DeleteMapping(value = "/innerApi/dict/dictApi/removeById")
     boolean removeById(String id);
 
     /**
@@ -35,7 +36,7 @@ public interface DictApi{
      * @param dict 字典信息
      * @return
      */
-    @PutMapping(value = "/innerApi/dictApi/save")
+    @PutMapping(value = "/innerApi/dict/dictApi/save")
     boolean save(@RequestPart("dict") Dict dict);
 
     /**
@@ -43,7 +44,7 @@ public interface DictApi{
      * @param dict 字典信息
      * @return
      */
-    @PostMapping(value = "/innerApi/dictApi/updateById")
+    @PostMapping(value = "/innerApi/dict/dictApi/updateById")
     boolean updateById(@RequestPart("dict") Dict dict);
 
     /**
@@ -51,7 +52,7 @@ public interface DictApi{
      * @param dict 字典信息
      * @return
      */
-    @GetMapping(value = "/innerApi/dictApi/selectOne")
+    @GetMapping(value = "/innerApi/dict/dictApi/selectOne")
     Dict selectOne(@RequestPart("dict") Dict dict);
 
     /**
@@ -59,7 +60,7 @@ public interface DictApi{
      * @param dict 字典信息
      * @return
      */
-    @GetMapping(value = "/innerApi/dictApi/select")
+    @GetMapping(value = "/innerApi/dict/dictApi/select")
     List<Dict> select(@RequestPart("dict") Dict dict);
 
     /**
@@ -67,7 +68,7 @@ public interface DictApi{
      * @param pageParamsVo 分页参数
      * @return
      */
-    @GetMapping(value = "/innerApi/dictApi/getPage")
+    @GetMapping(value = "/innerApi/dict/dictApi/getPage")
     PageResultVo<Dict> getPage(@RequestPart("dict") Dict dict,
                                @RequestPart("pageParamsVo") PageParamsVo pageParamsVo);
 }

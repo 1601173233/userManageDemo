@@ -19,7 +19,7 @@ public interface DictTypeApi{
      * @param id
      * @return
      */
-    @GetMapping(value = "/innerApi/dictTypeApi/getById")
+    @GetMapping(value = "/innerApi/dict/dictTypeApi/getById")
     DictType getById(String id);
 
     /**
@@ -27,7 +27,7 @@ public interface DictTypeApi{
      * @param id
      * @return
      */
-    @DeleteMapping(value = "/innerApi/dictTypeApi/removeById")
+    @DeleteMapping(value = "/innerApi/dict/dictTypeApi/removeById")
     boolean removeById(String id);
 
     /**
@@ -35,7 +35,7 @@ public interface DictTypeApi{
      * @param dictType 字典类型表信息
      * @return
      */
-    @PutMapping(value = "/innerApi/dictTypeApi/save")
+    @PutMapping(value = "/innerApi/dict/dictTypeApi/save")
     boolean save(@RequestPart("dictType") DictType dictType);
 
     /**
@@ -43,7 +43,7 @@ public interface DictTypeApi{
      * @param dictType 字典类型表信息
      * @return
      */
-    @PostMapping(value = "/innerApi/dictTypeApi/updateById")
+    @PostMapping(value = "/innerApi/dict/dictTypeApi/updateById")
     boolean updateById(@RequestPart("dictType") DictType dictType);
 
     /**
@@ -51,7 +51,7 @@ public interface DictTypeApi{
      * @param dictType 字典类型表信息
      * @return
      */
-    @GetMapping(value = "/innerApi/dictTypeApi/selectOne")
+    @GetMapping(value = "/innerApi/dict/dictTypeApi/selectOne")
     DictType selectOne(@RequestPart("dictType") DictType dictType);
 
     /**
@@ -59,7 +59,7 @@ public interface DictTypeApi{
      * @param dictType 字典类型表信息
      * @return
      */
-    @GetMapping(value = "/innerApi/dictTypeApi/select")
+    @GetMapping(value = "/innerApi/dict/dictTypeApi/select")
     List<DictType> select(@RequestPart("dictType") DictType dictType);
 
     /**
@@ -67,7 +67,7 @@ public interface DictTypeApi{
      * @param pageParamsVo 分页参数
      * @return
      */
-    @GetMapping(value = "/innerApi/dictTypeApi/getPage")
+    @GetMapping(value = "/innerApi/dict/dictTypeApi/getPage")
     PageResultVo<DictType> getPage(@RequestPart("dictType") DictType dictType,
                                    @RequestPart("pageParamsVo") PageParamsVo pageParamsVo);
 }

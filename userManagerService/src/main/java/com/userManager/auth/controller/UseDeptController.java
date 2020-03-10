@@ -1,10 +1,10 @@
-package com.userManagerauth.controller;
+package com.userManager.auth.controller;
 
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
-import com.userManagerauth.entity.UseDept;
-import com.userManagerauth.service.UseDeptService;
-import com.userManagerauth.api.UseDeptApi;
+import com.userManager.auth.entity.UseDept;
+import com.userManager.auth.service.UseDeptService;
+import com.userManager.auth.api.UseDeptApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;

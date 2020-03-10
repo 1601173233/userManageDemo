@@ -1,7 +1,7 @@
-package com.userManagerauth.controller;
+package com.userManager.auth.controller;
 
-import com.userManagerauth.entity.UseDept;
-import com.userManagerauth.api.UseDeptApi;
+import com.userManager.auth.entity.UseDept;
+import com.userManager.auth.api.UseDeptApi;
 import com.base.common.controller.BaseController;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;

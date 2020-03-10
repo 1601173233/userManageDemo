@@ -1,6 +1,6 @@
-package com.userManagerauth.api;
+package com.userManager.auth.api;
 
-import com.userManagerauth.entity.Auth;
+import com.userManager.auth.entity.Auth;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
 import feign.Param;

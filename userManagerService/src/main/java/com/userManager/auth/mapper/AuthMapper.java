@@ -1,6 +1,6 @@
-package com.userManagerauth.mapper;
+package com.userManager.auth.mapper;
 
-import com.userManagerauth.entity.Auth;
+import com.userManager.auth.entity.Auth;
 import org.springframework.stereotype.Component;
 import com.base.common.mapper.BaseCommonMapper;
 

@@ -3,8 +3,9 @@ package com.userManager.log.api;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
 import com.userManager.log.entity.OperationLog;
-import java.util.List;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 操作日志对外接口
@@ -19,7 +20,7 @@ public interface OperationLogApi{
      * @param id
      * @return
      */
-    @GetMapping(value = "/innerApi/operationLogApi/getById")
+    @GetMapping(value = "/innerApi/log/operationLogApi/getById")
     OperationLog getById(String id);
 
     /**
@@ -27,7 +28,7 @@ public interface OperationLogApi{
      * @param id
      * @return
      */
-    @DeleteMapping(value = "/innerApi/operationLogApi/removeById")
+    @DeleteMapping(value = "/innerApi/log/operationLogApi/removeById")
     boolean removeById(String id);
 
     /**
@@ -35,7 +36,7 @@ public interface OperationLogApi{
      * @param operationLog 操作日志信息
      * @return
      */
-    @PutMapping(value = "/innerApi/operationLogApi/save")
+    @PutMapping(value = "/innerApi/log/operationLogApi/save")
     boolean save(@RequestPart("operationLog") OperationLog operationLog);
 
     /**
@@ -43,7 +44,7 @@ public interface OperationLogApi{
      * @param operationLog 操作日志信息
      * @return
      */
-    @PostMapping(value = "/innerApi/operationLogApi/updateById")
+    @PostMapping(value = "/innerApi/log/operationLogApi/updateById")
     boolean updateById(@RequestPart("operationLog") OperationLog operationLog);
 
     /**
@@ -51,7 +52,7 @@ public interface OperationLogApi{
      * @param operationLog 操作日志信息
      * @return
      */
-    @GetMapping(value = "/innerApi/operationLogApi/selectOne")
+    @GetMapping(value = "/innerApi/log/operationLogApi/selectOne")
     OperationLog selectOne(@RequestPart("operationLog") OperationLog operationLog);
 
     /**
@@ -59,7 +60,7 @@ public interface OperationLogApi{
      * @param operationLog 操作日志信息
      * @return
      */
-    @GetMapping(value = "/innerApi/operationLogApi/select")
+    @GetMapping(value = "/innerApi/log/operationLogApi/select")
     List<OperationLog> select(@RequestPart("operationLog") OperationLog operationLog);
 
     /**
@@ -67,7 +68,7 @@ public interface OperationLogApi{
      * @param pageParamsVo 分页参数
      * @return
      */
-    @GetMapping(value = "/innerApi/operationLogApi/getPage")
+    @GetMapping(value = "/innerApi/log/operationLogApi/getPage")
     PageResultVo<OperationLog> getPage(@RequestPart("operationLog") OperationLog operationLog,
                                             @RequestPart("pageParamsVo") PageParamsVo pageParamsVo);
 }

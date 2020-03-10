@@ -1,7 +1,7 @@
-package com.userManagerauth.controller;
+package com.userManager.auth.controller;
 
-import com.userManagerauth.entity.UserRole;
-import com.userManagerauth.api.UserRoleApi;
+import com.userManager.auth.entity.UserRole;
+import com.userManager.auth.api.UserRoleApi;
 import com.base.common.controller.BaseController;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;

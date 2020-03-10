@@ -1,5 +1,4 @@
 
-
 -- ----------------------------
 -- Table structure for `auth`
 -- ----------------------------
@@ -38,30 +37,6 @@ CREATE TABLE `dept` (
   `MODIFIER` int(11) DEFAULT NULL COMMENT '修改人',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='部门';
-
--- ----------------------------
--- Records of dept
--- ----------------------------
-
--- ----------------------------
--- Table structure for `dept_role`
--- ----------------------------
-DROP TABLE IF EXISTS `dept_role`;
-CREATE TABLE `dept_role` (
-  `ID` int(11) NOT NULL COMMENT 'id',
-  `DEPT_ID` int(11) DEFAULT NULL COMMENT '部门Id',
-  `NAME` varchar(32) DEFAULT NULL COMMENT '角色名称',
-  `DEL_FLAG` int(1) DEFAULT '0' COMMENT '删除标志（0：未删除，1：已删除）',
-  `CREATE_TIME` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `CREATOR` int(11) DEFAULT NULL COMMENT '创建人',
-  `UPDATE_TIME` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `MODIFIER` int(11) DEFAULT NULL COMMENT '修改人',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门角色';
-
--- ----------------------------
--- Records of dept_role
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `dict`
@@ -169,6 +144,27 @@ CREATE TABLE `operation_log` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `role`
+-- ----------------------------
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `NAME` varchar(32) DEFAULT NULL COMMENT '角色名称',
+  `DEPT_ID` int(11) DEFAULT NULL COMMENT '部门Id',
+  `ROLE_TYPE` int(11) DEFAULT NULL COMMENT '角色类型：1.系统角色,2.部门角色',
+  `DEL_FLAG` int(1) DEFAULT NULL COMMENT '删除标志（0：未删除，1：已删除）',
+  `CREATE_TIME` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `CREATOR` int(11) DEFAULT NULL COMMENT '创建人',
+  `UPDATE_TIME` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `MODIFIER` int(11) DEFAULT NULL COMMENT '修改人',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色';
+
+-- ----------------------------
+-- Records of role
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `role_auth`
 -- ----------------------------
 DROP TABLE IF EXISTS `role_auth`;
@@ -180,25 +176,6 @@ CREATE TABLE `role_auth` (
 
 -- ----------------------------
 -- Records of role_auth
--- ----------------------------
-
--- ----------------------------
--- Table structure for `sys_role`
--- ----------------------------
-DROP TABLE IF EXISTS `sys_role`;
-CREATE TABLE `sys_role` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `NAME` varchar(32) DEFAULT NULL COMMENT '角色名称',
-  `DEL_FLAG` int(1) DEFAULT '0' COMMENT '删除标志（0：未删除，1：已删除）',
-  `CREATE_TIME` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `CREATOR` int(11) DEFAULT NULL COMMENT '创建人',
-  `UPDATE_TIME` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `MODIFIER` int(11) DEFAULT NULL COMMENT '修改人',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统角色';
-
--- ----------------------------
--- Records of sys_role
 -- ----------------------------
 
 -- ----------------------------
@@ -214,6 +191,7 @@ CREATE TABLE `use_dept` (
 -- ----------------------------
 -- Records of use_dept
 -- ----------------------------
+INSERT INTO `use_dept` VALUES ('1', '2');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -235,4 +213,17 @@ CREATE TABLE `user` (
 
 -- ----------------------------
 -- Records of user
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `user_role`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_role`;
+CREATE TABLE `user_role` (
+  `USER_ID` int(11) DEFAULT NULL COMMENT '用户id',
+  `ROLE_ID` int(11) DEFAULT NULL COMMENT '角色id'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户的角色';
+
+-- ----------------------------
+-- Records of user_role
 -- ----------------------------

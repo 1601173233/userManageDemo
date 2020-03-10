@@ -3,8 +3,9 @@ package com.userManager.user.api;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
 import com.userManager.user.entity.District;
-import java.util.List;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 区域管理对外接口
@@ -19,7 +20,7 @@ public interface DistrictApi{
      * @param id
      * @return
      */
-    @GetMapping(value = "/innerApi/districtApi/getById")
+    @GetMapping(value = "/innerApi/user/districtApi/getById")
     District getById(String id);
 
     /**
@@ -27,7 +28,7 @@ public interface DistrictApi{
      * @param id
      * @return
      */
-    @DeleteMapping(value = "/innerApi/districtApi/removeById")
+    @DeleteMapping(value = "/innerApi/user/districtApi/removeById")
     boolean removeById(String id);
 
     /**
@@ -35,7 +36,7 @@ public interface DistrictApi{
      * @param district 区域管理信息
      * @return
      */
-    @PutMapping(value = "/innerApi/districtApi/save")
+    @PutMapping(value = "/innerApi/user/districtApi/save")
     boolean save(@RequestPart("district") District district);
 
     /**
@@ -43,7 +44,7 @@ public interface DistrictApi{
      * @param district 区域管理信息
      * @return
      */
-    @PostMapping(value = "/innerApi/districtApi/updateById")
+    @PostMapping(value = "/innerApi/user/districtApi/updateById")
     boolean updateById(@RequestPart("district") District district);
 
     /**
@@ -51,7 +52,7 @@ public interface DistrictApi{
      * @param district 区域管理信息
      * @return
      */
-    @GetMapping(value = "/innerApi/districtApi/selectOne")
+    @GetMapping(value = "/innerApi/user/districtApi/selectOne")
     District selectOne(@RequestPart("district") District district);
 
     /**
@@ -59,7 +60,7 @@ public interface DistrictApi{
      * @param district 区域管理信息
      * @return
      */
-    @GetMapping(value = "/innerApi/districtApi/select")
+    @GetMapping(value = "/innerApi/user/districtApi/select")
     List<District> select(@RequestPart("district") District district);
 
     /**
@@ -67,7 +68,7 @@ public interface DistrictApi{
      * @param pageParamsVo 分页参数
      * @return
      */
-    @GetMapping(value = "/innerApi/districtApi/getPage")
+    @GetMapping(value = "/innerApi/user/districtApi/getPage")
     PageResultVo<District> getPage(@RequestPart("district") District district,
                                    @RequestPart("pageParamsVo") PageParamsVo pageParamsVo);
 }

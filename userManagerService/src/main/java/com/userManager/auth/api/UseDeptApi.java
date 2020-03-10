@@ -1,8 +1,8 @@
-package com.userManagerauth.api;
+package com.userManager.auth.api;
 
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
-import com.userManagerauth.entity.UseDept;
+import com.userManager.auth.entity.UseDept;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
 

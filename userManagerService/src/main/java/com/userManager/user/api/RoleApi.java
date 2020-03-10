@@ -3,8 +3,9 @@ package com.userManager.user.api;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
 import com.userManager.user.entity.Role;
-import java.util.List;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 角色对外接口
@@ -19,7 +20,7 @@ public interface RoleApi{
      * @param id
      * @return
      */
-    @GetMapping(value = "/innerApi/roleApi/getById")
+    @GetMapping(value = "/innerApi/user/roleApi/getById")
     Role getById(String id);
 
     /**
@@ -27,7 +28,7 @@ public interface RoleApi{
      * @param id
      * @return
      */
-    @DeleteMapping(value = "/innerApi/roleApi/removeById")
+    @DeleteMapping(value = "/innerApi/user/roleApi/removeById")
     boolean removeById(String id);
 
     /**
@@ -35,7 +36,7 @@ public interface RoleApi{
      * @param role 角色信息
      * @return
      */
-    @PutMapping(value = "/innerApi/roleApi/save")
+    @PutMapping(value = "/innerApi/user/roleApi/save")
     boolean save(@RequestPart("role") Role role);
 
     /**
@@ -43,7 +44,7 @@ public interface RoleApi{
      * @param role 角色信息
      * @return
      */
-    @PostMapping(value = "/innerApi/roleApi/updateById")
+    @PostMapping(value = "/innerApi/user/roleApi/updateById")
     boolean updateById(@RequestPart("role") Role role);
 
     /**
@@ -51,7 +52,7 @@ public interface RoleApi{
      * @param role 角色信息
      * @return
      */
-    @GetMapping(value = "/innerApi/roleApi/selectOne")
+    @GetMapping(value = "/innerApi/user/roleApi/selectOne")
     Role selectOne(@RequestPart("role") Role role);
 
     /**
@@ -59,7 +60,7 @@ public interface RoleApi{
      * @param role 角色信息
      * @return
      */
-    @GetMapping(value = "/innerApi/roleApi/select")
+    @GetMapping(value = "/innerApi/user/roleApi/select")
     List<Role> select(@RequestPart("role") Role role);
 
     /**
@@ -67,7 +68,7 @@ public interface RoleApi{
      * @param pageParamsVo 分页参数
      * @return
      */
-    @GetMapping(value = "/innerApi/roleApi/getPage")
+    @GetMapping(value = "/innerApi/user/roleApi/getPage")
     PageResultVo<Role> getPage(@RequestPart("role") Role role,
                                @RequestPart("pageParamsVo") PageParamsVo pageParamsVo);
 }

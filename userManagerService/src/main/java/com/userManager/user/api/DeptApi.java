@@ -3,8 +3,9 @@ package com.userManager.user.api;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
 import com.userManager.user.entity.Dept;
-import java.util.List;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 部门对外接口
@@ -19,7 +20,7 @@ public interface DeptApi{
      * @param id
      * @return
      */
-    @GetMapping(value = "/innerApi/deptApi/getById")
+    @GetMapping(value = "/innerApi/user/deptApi/getById")
     Dept getById(String id);
 
     /**
@@ -27,7 +28,7 @@ public interface DeptApi{
      * @param id
      * @return
      */
-    @DeleteMapping(value = "/innerApi/deptApi/removeById")
+    @DeleteMapping(value = "/innerApi/user/deptApi/removeById")
     boolean removeById(String id);
 
     /**
@@ -35,7 +36,7 @@ public interface DeptApi{
      * @param dept 部门信息
      * @return
      */
-    @PutMapping(value = "/innerApi/deptApi/save")
+    @PutMapping(value = "/innerApi/user/deptApi/save")
     boolean save(@RequestPart("dept") Dept dept);
 
     /**
@@ -43,7 +44,7 @@ public interface DeptApi{
      * @param dept 部门信息
      * @return
      */
-    @PostMapping(value = "/innerApi/deptApi/updateById")
+    @PostMapping(value = "/innerApi/user/deptApi/updateById")
     boolean updateById(@RequestPart("dept") Dept dept);
 
     /**
@@ -51,7 +52,7 @@ public interface DeptApi{
      * @param dept 部门信息
      * @return
      */
-    @GetMapping(value = "/innerApi/deptApi/selectOne")
+    @GetMapping(value = "/innerApi/user/deptApi/selectOne")
     Dept selectOne(@RequestPart("dept") Dept dept);
 
     /**
@@ -59,7 +60,7 @@ public interface DeptApi{
      * @param dept 部门信息
      * @return
      */
-    @GetMapping(value = "/innerApi/deptApi/select")
+    @GetMapping(value = "/innerApi/user/deptApi/select")
     List<Dept> select(@RequestPart("dept") Dept dept);
 
     /**
@@ -67,7 +68,7 @@ public interface DeptApi{
      * @param pageParamsVo 分页参数
      * @return
      */
-    @GetMapping(value = "/innerApi/deptApi/getPage")
+    @GetMapping(value = "/innerApi/user/deptApi/getPage")
     PageResultVo<Dept> getPage(@RequestPart("dept") Dept dept,
                                @RequestPart("pageParamsVo") PageParamsVo pageParamsVo);
 }

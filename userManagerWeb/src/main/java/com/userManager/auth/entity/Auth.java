@@ -1,4 +1,4 @@
-package com.userManagerauth.entity;
+package com.userManager.auth.entity;
 
 import com.base.common.entity.BaseModel;
 import io.swagger.annotations.ApiModel;

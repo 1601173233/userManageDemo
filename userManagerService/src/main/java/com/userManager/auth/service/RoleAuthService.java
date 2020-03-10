@@ -1,6 +1,6 @@
-package com.userManagerauth.service;
+package com.userManager.auth.service;
 
-import com.userManagerauth.entity.RoleAuth;
+import com.userManager.auth.entity.RoleAuth;
 import com.base.common.service.BaseService;
 
 /**

@@ -3,8 +3,9 @@ package com.userManager.user.api;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
 import com.userManager.user.entity.User;
-import java.util.List;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 用户对外接口
@@ -19,7 +20,7 @@ public interface UserApi{
      * @param id
      * @return
      */
-    @GetMapping(value = "/innerApi/userApi/getById")
+    @GetMapping(value = "/innerApi/user/userApi/getById")
     User getById(String id);
 
     /**
@@ -27,7 +28,7 @@ public interface UserApi{
      * @param id
      * @return
      */
-    @DeleteMapping(value = "/innerApi/userApi/removeById")
+    @DeleteMapping(value = "/innerApi/user/userApi/removeById")
     boolean removeById(String id);
 
     /**
@@ -35,7 +36,7 @@ public interface UserApi{
      * @param user 用户信息
      * @return
      */
-    @PutMapping(value = "/innerApi/userApi/save")
+    @PutMapping(value = "/innerApi/user/userApi/save")
     boolean save(@RequestPart("user") User user);
 
     /**
@@ -43,7 +44,7 @@ public interface UserApi{
      * @param user 用户信息
      * @return
      */
-    @PostMapping(value = "/innerApi/userApi/updateById")
+    @PostMapping(value = "/innerApi/user/userApi/updateById")
     boolean updateById(@RequestPart("user") User user);
 
     /**
@@ -51,7 +52,7 @@ public interface UserApi{
      * @param user 用户信息
      * @return
      */
-    @GetMapping(value = "/innerApi/userApi/selectOne")
+    @GetMapping(value = "/innerApi/user/userApi/selectOne")
     User selectOne(@RequestPart("user") User user);
 
     /**
@@ -59,7 +60,7 @@ public interface UserApi{
      * @param user 用户信息
      * @return
      */
-    @GetMapping(value = "/innerApi/userApi/select")
+    @GetMapping(value = "/innerApi/user/userApi/select")
     List<User> select(@RequestPart("user") User user);
 
     /**
@@ -67,7 +68,7 @@ public interface UserApi{
      * @param pageParamsVo 分页参数
      * @return
      */
-    @GetMapping(value = "/innerApi/userApi/getPage")
+    @GetMapping(value = "/innerApi/user/userApi/getPage")
     PageResultVo<User> getPage(@RequestPart("user") User user,
                                @RequestPart("pageParamsVo") PageParamsVo pageParamsVo);
 }
