@@ -1,0 +1,22 @@
+#服务名称
+spring:
+  application:
+    name: GATEWARY-SERVER
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+#          lower-case-service-id: true
+# 服务端口号
+server:
+  port: 10001
+
+#eureka注册中心
+eureka:
+  client:
+    serviceUrl:
+      defaultZone:
+
+# 配置Gateway日志等级，输出转发细节信息
+logging:

@@ -95,4 +95,30 @@ public class DistrictController implements DistrictApi {
 
         return page;
     }
+
+    @Override
+    public PageResultVo<District> getTree() {
+        log.info("根据信息获取区域树");
+
+        List<District> districtList = districtService.list();
+        return null;
+    }
+
+    @Override
+    public PageResultVo<District> getTreeByParentCode(Integer parentCode) {
+        log.info("根据信息获取自定子节点下的区域树");
+        return null;
+    }
+
+    @Override
+    public PageResultVo<District> getTreeWithDept() {
+        log.info("根据信息获取区域部门树");
+        return null;
+    }
+
+    @Override
+    public PageResultVo<District> getTreeWithDeptByParentCode(Integer parentCode) {
+        log.info("根据信息获取自定子节点下的区域部门树");
+        return null;
+    }
 }

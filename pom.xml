@@ -28,6 +28,7 @@
 
     <modules>
         <module>eureka</module>
+        <module>gateway</module>
         <module>baseModel</module>
         <module>baseService</module>
         <module>baseWeb</module>

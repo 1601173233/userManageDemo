@@ -71,4 +71,32 @@ public interface DistrictApi{
     @GetMapping(value = "/innerApi/user/districtApi/getPage")
     PageResultVo<District> getPage(@RequestPart("district") District district,
                                    @RequestPart("pageParamsVo") PageParamsVo pageParamsVo);
+
+    /**
+     * 根据信息获取区域树
+     * @return
+     */
+    @GetMapping(value = "/innerApi/user/districtApi/getTree")
+    PageResultVo<District> getTree();
+
+    /**
+     * 根据信息获取自定子节点下的区域树
+     * @return
+     */
+    @GetMapping(value = "/innerApi/user/districtApi/getTreeByParentCode")
+    PageResultVo<District> getTreeByParentCode(Integer parentCode);
+
+    /**
+     * 根据信息获取区域部门树
+     * @return
+     */
+    @GetMapping(value = "/innerApi/user/districtApi/getTreeWithDept")
+    PageResultVo<District> getTreeWithDept();
+
+    /**
+     * 根据信息获取自定子节点下的区域部门树
+     * @return
+     */
+    @GetMapping(value = "/innerApi/user/districtApi/getTreeWithDeptByParentCode")
+    PageResultVo<District> getTreeWithDeptByParentCode(Integer parentCode);
 }

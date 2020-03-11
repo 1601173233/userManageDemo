@@ -15,7 +15,7 @@ import java.util.List;
  * @version : 2020年03月10日
  * @since
  */
-@FeignClient(name = "USER-MANAGER-SERVER")
+@FeignClient(name = "${serviceName.gateway}/${serviceName.userManage}")
 public interface DictTypeApi{
     /**
      * 根据 id 获取字典类型表信息
