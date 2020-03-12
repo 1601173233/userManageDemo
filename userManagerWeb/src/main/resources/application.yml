@@ -13,7 +13,14 @@ spring:
     name: USER-MANAGER-WEB
   main:
     allow-bean-definition-overriding: true
-
+  redis:
+    host: 
+    port: 6379
+    timeout: 500
+    pool:
+      max-idle: 500
+      max-wait: 500
+      max-active: 1000
 #所有接口的默认前缀
 urlHead: '/api'
 

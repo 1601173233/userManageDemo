@@ -14,7 +14,14 @@ spring:
       maxRequestSize: 5MB
   application:
     name: USER-MANAGER-SERVER
-
+  redis:
+    host:
+    port: 6379
+    timeout: 500
+    pool:
+      max-idle: 500
+      max-wait: 500
+      max-active: 1000
 #日志配置
 logging:
   level:

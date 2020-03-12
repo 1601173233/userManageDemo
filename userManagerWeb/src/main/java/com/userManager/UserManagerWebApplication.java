@@ -12,7 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * 启动类
  */
-@EnableFeignClients
+@EnableFeignClients(basePackages={"com.userManager", "com.base"})
 @EnableDiscoveryClient
 @SpringBootApplication
 @Slf4j
