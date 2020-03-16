@@ -19,6 +19,10 @@ public class Menu extends BaseModel{
     @ApiModelProperty(value="id")
     private Integer id;
 
+    /** 编码 */
+    @ApiModelProperty(value="编码")
+    private String code;
+
     /** 菜单名称 */
     @ApiModelProperty(value="菜单名称")
     private String name;
@@ -31,9 +35,13 @@ public class Menu extends BaseModel{
     @ApiModelProperty(value="图标名称")
     private String icon;
 
-    /** 父菜单ID */
-    @ApiModelProperty(value="父菜单ID")
-    private Integer parentId;
+    /** 排序号 */
+    @ApiModelProperty(value="排序号")
+    private Integer sortNum;
+
+    /** 父菜单编码 */
+    @ApiModelProperty(value="父菜单编码")
+    private String parentCode;
 
     /** 删除标志（0：未删除，1：已删除） */
     @ApiModelProperty(value="删除标志（0：未删除，1：已删除）")

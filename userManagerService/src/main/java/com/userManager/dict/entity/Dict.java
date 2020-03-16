@@ -39,6 +39,10 @@ public class Dict extends BaseModel{
     @TableField("DESCRIBES")
     private String describes;
 
+    /** 排序号 */
+    @TableField("SORT_NUM")
+    private int sortNum;
+
     /** 删除标志（0：未删除，1：已删除） */
     @TableLogic(value = "0", delval = "1")
     @TableField("DEL_FLAG")

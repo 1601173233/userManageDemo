@@ -27,6 +27,10 @@ public class Dict extends BaseModel{
     @ApiModelProperty(value="字典类型编码")
     private String code;
 
+    /** 排序号 */
+    @ApiModelProperty(value="排序号")
+    private int sortNum;
+
     /** 父字典ID */
     @ApiModelProperty(value="父字典ID")
     private Integer parentId;

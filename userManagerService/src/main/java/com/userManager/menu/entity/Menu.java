@@ -23,6 +23,10 @@ public class Menu extends BaseModel{
     @TableField("ID")
     private Integer id;
 
+    /** 编码 */
+    @TableField("CODE")
+    private String code;
+
     /** 菜单名称 */
     @TableField("NAME")
     private String name;
@@ -35,9 +39,13 @@ public class Menu extends BaseModel{
     @TableField("ICON")
     private String icon;
 
-    /** 父菜单ID */
-    @TableField("PARENT_ID")
-    private Integer parentId;
+    /** 排序号 */
+    @TableField("SORT_NUM")
+    private Integer sortNum;
+
+    /** 父菜单编码 */
+    @TableField("PARENT_CODE")
+    private String parentCode;
 
     /** 删除标志（0：未删除，1：已删除） */
     @TableLogic(value = "0", delval = "1")

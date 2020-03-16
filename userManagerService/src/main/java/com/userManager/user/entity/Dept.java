@@ -23,6 +23,10 @@ public class Dept extends BaseModel{
     @TableField("ID")
     private Integer id;
 
+    /** 编码 */
+    @TableField("CODE")
+    private String code;
+
     /** 部门名称 */
     @TableField("NAME")
     private String name;

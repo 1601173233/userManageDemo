@@ -23,13 +23,21 @@ public class District extends BaseModel{
     @TableField("ID")
     private Integer id;
 
+    /** 编码 */
+    @TableField("CODE")
+    private String code;
+
     /** 区域名称 */
     @TableField("NAME")
     private String name;
 
-    /** 区域ID */
-    @TableField("PARENT_ID")
-    private Integer parentId;
+    /** 排序号 */
+    @TableField("SORT_NUM")
+    private Integer sortNum;
+
+    /** 父区域编码 */
+    @TableField("PARENT_CODE")
+    private String parentCode;
 
     /** 删除标志（0：未删除，1：已删除） */
     @TableLogic(value = "0", delval = "1")

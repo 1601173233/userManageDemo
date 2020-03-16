@@ -46,3 +46,7 @@ feign:
     enabled: true
   okhttp:
     enabled: true
+
+serviceName:
+  gateway: GATEWARY-SERVER
+  userManage: USER-MANAGER-SERVER

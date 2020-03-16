@@ -29,7 +29,8 @@ logging:
 
 #MyabtisPlus查询注册
 mybatis-plus:
-  typeAliasesPackage: com.base.common.mybatics.handler
+  typeAliasesPackage: com.base.common.mybatis
+
 
 #eureka注册中心
 eureka:
