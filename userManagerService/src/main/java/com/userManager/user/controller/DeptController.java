@@ -95,4 +95,9 @@ public class DeptController implements DeptApi {
 
         return page;
     }
+
+    @Override
+    public boolean move(Integer id, Integer newParentId, Integer parentType, Integer nextNodeId) {
+        return deptService.move(id, newParentId, parentType, nextNodeId);
+    }
 }

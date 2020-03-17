@@ -44,5 +44,5 @@ public class TreeVo<T> {
 
     /** 返回的列表结果 */
     @ApiModelProperty(value="列表结果")
-    List<TreeVo> childrens;
+    List<TreeVo<T>> childrens;
 }

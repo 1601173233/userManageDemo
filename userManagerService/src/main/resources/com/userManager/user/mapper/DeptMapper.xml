@@ -2,30 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.userManager.user.mapper.DeptMapper" >
     <resultMap id="BaseResultMap" type="com.userManager.user.entity.Dept" >
-            <result column="ID" property="id" jdbcType="INTEGER" />
-            <result column="NAME" property="name" jdbcType="VARCHAR" />
-            <result column="ICON" property="icon" jdbcType="VARCHAR" />
-            <result column="PARENT_ID" property="parentId" jdbcType="INTEGER" />
-            <result column="DISTRICT_ID" property="districtId" jdbcType="INTEGER" />
-            <result column="DEL_FLAG" property="delFlag" jdbcType="INTEGER" />
-            <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
-            <result column="CREATOR" property="creator" jdbcType="INTEGER" />
-            <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
-            <result column="MODIFIER" property="modifier" jdbcType="INTEGER" />
+        <result column="ID" property="id" jdbcType="INTEGER" />
+        <result column="CODE" property="code" jdbcType="VARCHAR" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="ICON" property="icon" jdbcType="VARCHAR" />
+        <result column="SORT_NUM" property="sortNum" jdbcType="INTEGER" />
+        <result column="PARENT_CODE" property="parentCode" jdbcType="VARCHAR" />
+        <result column="DISTRICT_CODE" property="districtCode" jdbcType="VARCHAR" />
+        <result column="PARENT_TYPE" property="parentType" jdbcType="INTEGER" />
+        <result column="DEL_FLAG" property="delFlag" jdbcType="INTEGER" />
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="CREATOR" property="creator" jdbcType="INTEGER" />
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="MODIFIER" property="modifier" jdbcType="INTEGER" />
     </resultMap>
 
     <!-- 定义查询的字段 -->
     <sql id="Base_Column_List" >
-            A.ID,
-            A.NAME,
-            A.ICON,
-            A.PARENT_ID,
-            A.DISTRICT_ID,
-            A.DEL_FLAG,
-            A.CREATE_TIME,
-            A.CREATOR,
-            A.UPDATE_TIME,
-            A.MODIFIER
+        A.ID,
+        A.CODE,
+        A.NAME,
+        A.ICON,
+        A.SORT_NUM,
+        A.PARENT_CODE,
+        A.DISTRICT_CODE,
+        A.PARENT_TYPE,
+        A.DEL_FLAG,
+        A.CREATE_TIME,
+        A.CREATOR,
+        A.UPDATE_TIME,
+        A.MODIFIER
     </sql>
 
     <select id="getListByIdList" parameterType="list" resultMap="BaseResultMap">
@@ -37,4 +43,43 @@
         </foreach>
         AND FLAG = ${@com.suntek.Ognl@getFalseType()}
     </select>
+
+    <select id="getMaxCodeByParentCode" parameterType="String" resultType="String">
+        SELECT MAX(CODE)
+        FROM DEPT
+        WHERE PARENT_CODE = #{parentCode}
+    </select>
+
+    <select id="getMaxSortNumByParentCode" parameterType="String" resultType="Int">
+        SELECT MAX(SORT_NUM)
+        FROM DEPT
+        WHERE PARENT_CODE = #{parentCode}
+    </select>
+
+    <update id="updateSonCode">
+        UPDATE DEPT
+           SET CODE = CONCAT(#{newParentCode}, SUBSTRING(CODE, LENGTH(#{oldParentCode}) - LENGTH(CODE))),
+               PARENT_CODE = CONCAT(#{newParentCode}, SUBSTRING(PARENT_CODE, LENGTH(#{oldParentCode}) - LENGTH(PARENT_CODE)))
+        WHERE PARENT_CODE LIKE #{oldParentCode, typeHandler=LeftLikeHandler}
+    </update>
+
+    <update id="updateSonDistrictCode">
+        UPDATE DEPT
+           SET DISTRICT_CODE = #{districtCode}
+         WHERE PARENT_CODE LIKE #{code, typeHandler=LeftLikeHandler}
+    </update>
+
+    <update id="updateOtherNodeSort">
+        UPDATE DEPT
+           SET SORT_NUM = SORT_NUM + #{increaseCount}
+         WHERE SORT_NUM >= #{startSortNum}
+               <![CDATA[AND SORT_NUM <= #{endSortNum}]]>
+           AND PARENT_CODE = #{parentCode}
+    </update>
+
+    <update id="updateDistrictCodeByDistrictMove">
+        UPDATE DEPT
+           SET DISTRICT_CODE = CONCAT(#{code}, SUBSTRING(DISTRICT_CODE, LENGTH(#{oldCode}) - LENGTH(DISTRICT_CODE)))
+         WHERE DISTRICT_CODE LIKE #{oldCode, typeHandler=LeftLikeHandler}
+    </update>
 </mapper>

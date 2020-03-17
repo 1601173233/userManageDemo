@@ -119,7 +119,7 @@ public class DistrictController implements DistrictApi {
     }
 
     @Override
-    public TreeVo<String> getTreeByParentCode(Integer parentCode) {
+    public TreeVo<String> getTreeByParentCode(String parentCode) {
         log.info("根据信息获取自定子节点下的区域树");
 
         return districtService.getTreeByParentCode(parentCode);
@@ -133,7 +133,7 @@ public class DistrictController implements DistrictApi {
     }
 
     @Override
-    public TreeVo<String> getTreeWithDeptByParentCode(Integer parentCode) {
+    public TreeVo<String> getTreeWithDeptByParentCode(String parentCode) {
         log.info("根据信息获取自定子节点下的区域部门树");
 
         return districtService.getTreeWithDeptByParentCode(parentCode);

@@ -1,11 +1,12 @@
 package com.userManager.user.api;
 
-import com.userManager.user.entity.Dept;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
+import com.userManager.user.entity.Dept;
 import feign.Param;
 import feign.RequestLine;
 import org.springframework.cloud.openfeign.FeignClient;
+
 import java.util.List;
 
 /**
@@ -72,4 +73,18 @@ public interface DeptApi{
      */
     @RequestLine(value = "GET /innerApi/user/deptApi/getPage")
     PageResultVo<Dept> getPage(@Param("dept") Dept dept, @Param("pageParamsVo") PageParamsVo pageParamsVo);
+
+    /**
+     * 节点移动到指定的父节点
+     * @param id 移动的节点ID
+     * @param newParentId 父节点ID
+     * @param parentType 父节点类型:1.区域，2.部门
+     * @param nextNodeId 下一个节点的Id，如果为空说明是插入
+     * @return
+     */
+    @RequestLine(value = "PUT /innerApi/user/deptApi/move")
+    boolean move(@Param("id") Integer id,
+                 @Param("newParentId") Integer newParentId,
+                 @Param("parentType") Integer parentType,
+                 @Param("nextNodeId") Integer nextNodeId);
 }

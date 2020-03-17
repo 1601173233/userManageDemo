@@ -5,9 +5,14 @@ import com.base.common.service.impl.BaseServiceImpl;
 import com.base.common.util.ExceptionUtil;
 import com.base.common.util.TreeUtil;
 import com.base.common.vo.TreeVo;
+import com.userManager.user.entity.Dept;
 import com.userManager.user.entity.District;
+import com.userManager.user.enums.DeptParentType;
 import com.userManager.user.mapper.DistrictMapper;
+import com.userManager.user.service.DeptService;
 import com.userManager.user.service.DistrictService;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,6 +28,8 @@ import java.util.List;
 @Service
 public class DistrictServiceImpl
         extends BaseServiceImpl<District, DistrictMapper> implements DistrictService {
+    @Autowired
+    private DeptService deptService;
 
     @Override
     public District getByCode(String code){
@@ -31,13 +38,9 @@ public class DistrictServiceImpl
         return getOne(new QueryWrapper<>(district));
     }
 
-    /**
-     * 保存方法
-     * @param district
-     * @return
-     */
+    @Override
     public boolean save(District district){
-        if(district.getParentCode() == null){
+        if(StringUtils.isEmpty(district.getParentCode())){
             ExceptionUtil.validError("父节点编码不能为空");
         }
 
@@ -57,7 +60,7 @@ public class DistrictServiceImpl
         // 获取父节点编码
         String parentCode;
         // 如果父节点是根节点的话
-        if(newParentId == null){
+        if(newParentId == null || newParentId == 0){
             parentCode = "0";
         }else{
             District parentDistrict = getById(newParentId);
@@ -73,6 +76,9 @@ public class DistrictServiceImpl
 
             // 更新所有的子节点
             baseMapper.updateSonCode(oldCode, district.getCode());
+
+            // 修改所有关联的部门的行政区编码
+            deptService.updateDistrictCodeByDistrictMove(oldCode, district.getCode());
 
             district.setParentCode(parentCode);
 
@@ -160,36 +166,116 @@ public class DistrictServiceImpl
 
     @Override
     public TreeVo<String> getTree() {
-        List<District> districtList = list();
+        return getTreeByParentCode("0");
+    }
+
+    @Override
+    public TreeVo<String> getTreeByParentCode(String parentCode) {
+        if(parentCode == null){
+            parentCode = "0";
+        }
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.likeRight("CODE", parentCode);
+
+        List<District> districtList = list(queryWrapper);
+
+        // 父节点
+        TreeVo<String> parentTreeVo = null;
+
+        // 如果是默认父节点
+        if(parentCode.equals("0")) {
+            parentTreeVo = new TreeVo();
+            parentTreeVo.setParentId(null);
+            parentTreeVo.setName("行政区");
+            parentTreeVo.setId("0");
+            parentTreeVo.setData("0");
+        }
 
         // 把结果转换为树节点
         List<TreeVo<String>> treeVoList = new ArrayList<>(districtList.size());
         for(District district : districtList){
-            treeVoList.add(district.convertTreeNode());
+            TreeVo<String> treeVo = district.convertTreeNode();
+
+            // 如果是父节点，记录起来
+            if(treeVo.getId().equals(parentCode)){
+                parentTreeVo = treeVo;
+            }
+
+            treeVoList.add(treeVo);
+        }
+
+        // 如果默认父节点为空，那么直接返回空数据
+        if(parentTreeVo == null){
+            return null;
         }
 
         // 树节点构造为树结构
-        treeVoList = TreeUtil.bulidTree(treeVoList, "0", true);
-        TreeVo parentTreeVo = new TreeVo();
-        parentTreeVo.setParentId(null);
-        parentTreeVo.setName("行政区");
-        parentTreeVo.setId("0");
+        treeVoList = TreeUtil.bulidTree(treeVoList, parentCode.toString(), true);
+
         parentTreeVo.setChildrens(treeVoList);
         return parentTreeVo;
     }
 
     @Override
-    public TreeVo<String> getTreeByParentCode(Integer parentCode) {
-        return null;
-    }
-
-    @Override
     public TreeVo<String> getTreeWithDept() {
-        return null;
+        return getTreeWithDeptByParentCode("0");
     }
 
     @Override
-    public TreeVo<String> getTreeWithDeptByParentCode(Integer parentCode) {
-        return null;
+    public TreeVo<String> getTreeWithDeptByParentCode(String parentCode) {
+        if(parentCode == null){
+            parentCode = "0";
+        }
+
+        // 行政区查询条件
+        QueryWrapper districtQueryWrapper = new QueryWrapper();
+        districtQueryWrapper.likeRight("CODE", parentCode);
+
+        // 部门查询条件
+        QueryWrapper deptQueryWrapper = new QueryWrapper();
+        deptQueryWrapper.likeRight("DISTRICT_CODE", parentCode);
+
+        List<District> districtList = list(districtQueryWrapper);
+        List<Dept> deptList = deptService.list(deptQueryWrapper);
+
+        // 父节点
+        TreeVo<String> parentTreeVo = null;
+
+        // 如果是默认父节点
+        if(parentCode.equals("0")) {
+            parentTreeVo = new TreeVo();
+            parentTreeVo.setParentId(null);
+            parentTreeVo.setName("");
+            parentTreeVo.setId("0");
+            parentTreeVo.setData("0");
+        }
+
+        // 把结果转换为树节点
+        List<TreeVo<String>> treeVoList = new ArrayList<>(districtList.size());
+        for(District district : districtList){
+            TreeVo<String> treeVo = district.convertTreeNode();
+
+            // 如果是父节点，记录起来
+            if(treeVo.getId().equals(parentCode)){
+                parentTreeVo = treeVo;
+            }
+
+            treeVoList.add(treeVo);
+        }
+
+        // 如果默认父节点为空，那么直接返回空数据
+        if(parentTreeVo == null){
+            return null;
+        }
+
+        for(Dept dept : deptList){
+            dept.setSortNum(dept.getSortNum() + 10000); // 默认排在行政区之后
+            treeVoList.add(dept.convertTreeNode());
+        }
+
+        // 树节点构造为树结构
+        treeVoList = TreeUtil.bulidTree(treeVoList, parentCode, DeptParentType.DISTRICT.getCode().toString(),true);
+        parentTreeVo.setChildrens(treeVoList);
+        return parentTreeVo;
     }
 }

@@ -39,7 +39,7 @@ public interface DistrictService extends BaseService<District>{
      * 根据信息获取自定子节点下的区域树
      * @return
      */
-    TreeVo<String> getTreeByParentCode(Integer parentCode);
+    TreeVo<String> getTreeByParentCode(String parentCode);
 
     /**
      * 根据信息获取区域部门树
@@ -51,5 +51,5 @@ public interface DistrictService extends BaseService<District>{
      * 根据信息获取自定子节点下的区域部门树
      * @return
      */
-    TreeVo<String> getTreeWithDeptByParentCode(Integer parentCode);
+    TreeVo<String> getTreeWithDeptByParentCode(String parentCode);
 }

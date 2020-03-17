@@ -42,7 +42,7 @@ public class Dept extends BaseModel{
     private String districtCode;
 
     /** 父节点类型 */
-    @ApiModelProperty(value="父节点类型")
+    @ApiModelProperty(value="父节点类型:1.区域，2.部门")
     private Integer parentType;
 
     /** 排序号 */

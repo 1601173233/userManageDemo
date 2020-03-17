@@ -1,12 +1,11 @@
 package com.userManager.user.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.base.common.entity.BaseModel;
+import com.base.common.vo.TreeVo;
+import com.userManager.user.enums.DeptParentType;
 import lombok.Data;
+
 import java.util.Date;
 /**
  * 部门
@@ -35,13 +34,21 @@ public class Dept extends BaseModel{
     @TableField("ICON")
     private String icon;
 
-    /** 父部门ID */
-    @TableField("PARENT_ID")
-    private Integer parentId;
+    /** 排序号 */
+    @TableField("SORT_NUM")
+    private Integer sortNum;
 
-    /** 所属行政区ID */
-    @TableField("DISTRICT_ID")
-    private Integer districtId;
+    /** 父节点类型 */
+    @TableField("PARENT_TYPE")
+    private Integer parentType;
+
+    /** 父部门编码 */
+    @TableField("PARENT_CODE")
+    private String parentCode;
+
+    /** 所属行政区编码 */
+    @TableField("DISTRICT_CODE")
+    private String districtCode;
 
     /** 删除标志（0：未删除，1：已删除） */
     @TableLogic(value = "0", delval = "1")
@@ -63,5 +70,29 @@ public class Dept extends BaseModel{
     /** 修改人 */
     @TableField("MODIFIER")
     private Integer modifier;
+
+    /**
+     * 构造树节点
+     * @return
+     */
+    public TreeVo<String> convertTreeNode(){
+        TreeVo<String> treeVo = new TreeVo<>();
+        treeVo.setId(code);
+        treeVo.setName(name);
+        treeVo.setSortNum(sortNum);
+        treeVo.setType(DeptParentType.DEPT.getCode().toString());
+        treeVo.setData(id.toString());
+
+        // 如果父部门编码为0，那么父节点是区域，否则是部门
+        if(parentCode.equals("0")) {
+            treeVo.setParentId(districtCode);
+            treeVo.setParentType(DeptParentType.DISTRICT.getCode().toString());
+        }else{
+            treeVo.setParentId(parentCode);
+            treeVo.setParentType(DeptParentType.DEPT.getCode().toString());
+        }
+
+        return treeVo;
+    }
 
 }

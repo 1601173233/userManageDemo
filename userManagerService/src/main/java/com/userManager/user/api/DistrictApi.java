@@ -97,7 +97,7 @@ public interface DistrictApi{
      * @return
      */
     @GetMapping(value = "/innerApi/user/districtApi/getTreeByParentCode")
-    TreeVo<String> getTreeByParentCode(Integer parentCode);
+    TreeVo<String> getTreeByParentCode(String parentCode);
 
     /**
      * 根据信息获取区域部门树
@@ -111,5 +111,5 @@ public interface DistrictApi{
      * @return
      */
     @GetMapping(value = "/innerApi/user/districtApi/getTreeWithDeptByParentCode")
-    TreeVo<String> getTreeWithDeptByParentCode(Integer parentCode);
+    TreeVo<String> getTreeWithDeptByParentCode(String parentCode);
 }

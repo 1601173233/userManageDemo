@@ -188,8 +188,8 @@ public class DistrictController extends BaseController {
      */
     @ApiOperation(value = "根据信息获取自定子节点下的区域树")
     @GetMapping("/getTreeByParentCode")
-    @ApiImplicitParam(name="parentCode", value ="父节点编码", required = true, dataType = "int", paramType = "query")
-    public ResponseEntity<Response<TreeVo<String>>> getTreeByParentCode(Integer parentCode){
+    @ApiImplicitParam(name="parentCode", value ="父节点编码", required = true, dataType = "String", paramType = "query")
+    public ResponseEntity<Response<TreeVo<String>>> getTreeByParentCode(String parentCode){
         log.info("根据信息获取自定子节点下的区域树");
         TreeVo<String> treeVo = districtApi.getTreeByParentCode(parentCode);
         return responseOk(treeVo);
@@ -213,8 +213,8 @@ public class DistrictController extends BaseController {
      */
     @ApiOperation(value = "根据信息获取自定子节点下的区域部门树")
     @GetMapping("/getTreeWithDeptByParentCode")
-    @ApiImplicitParam(name="parentCode", value ="父节点编码", required = true, dataType = "int", paramType = "query")
-    public ResponseEntity<Response<TreeVo<String>>> getTreeWithDeptByParentCode(Integer parentCode){
+    @ApiImplicitParam(name="parentCode", value ="父节点编码", required = true, dataType = "String", paramType = "query")
+    public ResponseEntity<Response<TreeVo<String>>> getTreeWithDeptByParentCode(String parentCode){
         log.info("根据信息获取自定子节点下的区域部门树");
         TreeVo<String> treeVo = districtApi.getTreeWithDeptByParentCode(parentCode);
         return responseOk(treeVo);

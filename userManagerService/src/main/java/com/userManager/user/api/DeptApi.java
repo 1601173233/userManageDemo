@@ -71,4 +71,17 @@ public interface DeptApi{
     @GetMapping(value = "/innerApi/user/deptApi/getPage")
     PageResultVo<Dept> getPage(@RequestPart("dept") Dept dept,
                                @RequestPart("pageParamsVo") PageParamsVo pageParamsVo);
+    /**
+     * 节点移动到指定的父节点
+     * @param id 移动的节点ID
+     * @param newParentId 父节点ID
+     * @param parentType 父节点类型:1.区域，2.部门
+     * @param nextNodeId 下一个节点的Id，如果为空说明是插入
+     * @return
+     */
+    @PutMapping(value = "/innerApi/user/deptApi/move")
+    boolean move(@RequestPart("id") Integer id,
+                 @RequestPart("newParentId") Integer newParentId,
+                 @RequestPart("parentType") Integer parentType,
+                 @RequestPart(value = "nextNodeId", required = false) Integer nextNodeId);
 }

@@ -149,4 +149,26 @@ public class DeptController extends BaseController {
 
         return responseOk(page);
     }
+
+    /**
+     * 节点移动到指定的父节点
+     * @param id 移动的节点ID
+     * @param newParentId 父节点ID
+     * @param parentType 父节点类型:1.区域，2.部门
+     * @param nextNodeId 下一个节点的Id，如果为空说明是插入
+     */
+    @ApiOperation(value = "节点移动到指定的父节点")
+    @PutMapping("/move")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="id", value ="移动的节点ID", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name="newParentId", value ="父节点ID", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name="parentType", value ="父节点类型:1.区域，2.部门", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name="nextNodeId", value ="移动后当前节点后一个节点的ID，空表示当前节点为最后一个节点（不能移动到区域的前面）", dataType = "int", paramType = "query")
+    })
+    public ResponseEntity<Response> move(Integer id, Integer newParentId, Integer parentType, Integer nextNodeId){
+        log.info("根据信息获取区域管理分页信息：节点{},移动到{}的最后", id, newParentId);
+        boolean result = deptApi.move(id, newParentId, parentType ,nextNodeId);
+        return updateResponse(result);
+    }
+
 }

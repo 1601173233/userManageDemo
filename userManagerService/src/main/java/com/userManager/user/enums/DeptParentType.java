@@ -1,33 +1,33 @@
 package com.userManager.user.enums;
 
 /**
- * 部门树节点类型
+ * 部门父节点类型
  *
  * @author huangyujie
  * @version 2019/7/11
  */
-public enum DeptTreeType {
+public enum DeptParentType {
     /** 行政区 */
-    DISTRICT("1"),
+    DISTRICT(1),
     /** 部门 */
-    DEPT("2");
+    DEPT(2);
 
     /**
      * 构造方法
      * @param code
      */
-    DeptTreeType(String code){
+    DeptParentType(Integer code){
         this.code = code;
     }
 
     /** 返回编码 */
-    private String code;
+    private Integer code;
 
     /**
      * 返回编码
      * @return
      */
-    public String getCode(){
+    public Integer getCode(){
         return code;
     }
 }

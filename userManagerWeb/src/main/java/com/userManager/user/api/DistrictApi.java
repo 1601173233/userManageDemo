@@ -99,7 +99,7 @@ public interface DistrictApi{
      * @return
      */
     @RequestLine(value = "GET /innerApi/user/districtApi/getTreeByParentCode")
-    TreeVo<String> getTreeByParentCode(@Param("parentCode") Integer parentCode);
+    TreeVo<String> getTreeByParentCode(@Param("parentCode") String parentCode);
 
     /**
      * 根据信息获取区域部门树
@@ -113,6 +113,6 @@ public interface DistrictApi{
      * @return
      */
     @RequestLine(value = "GET /innerApi/user/districtApi/getTreeWithDeptByParentCode")
-    TreeVo<String> getTreeWithDeptByParentCode(@Param("parentCode") Integer parentCode);
+    TreeVo<String> getTreeWithDeptByParentCode(@Param("parentCode") String parentCode);
 
 }
