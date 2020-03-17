@@ -2,6 +2,7 @@ package com.userManager.user.api;
 
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
+import com.base.common.vo.TreeVo;
 import com.userManager.user.entity.District;
 import org.springframework.web.bind.annotation.*;
 
@@ -73,30 +74,42 @@ public interface DistrictApi{
                                    @RequestPart("pageParamsVo") PageParamsVo pageParamsVo);
 
     /**
+     * 节点移动到指定的父节点
+     * @param id 移动的节点ID
+     * @param newParentId 父节点ID
+     * @param nextNodeId 移动后当前节点后一个节点的ID，空表示当前节点为最后一个节点
+     * @return
+     */
+    @PutMapping(value = "/innerApi/user/districtApi/move")
+    boolean move(@RequestPart("id") Integer id,
+                 @RequestPart("newParentId") Integer newParentId,
+                 @RequestPart(value = "nextNodeId", required = false) Integer nextNodeId);
+
+    /**
      * 根据信息获取区域树
      * @return
      */
     @GetMapping(value = "/innerApi/user/districtApi/getTree")
-    PageResultVo<District> getTree();
+    TreeVo<String> getTree();
 
     /**
      * 根据信息获取自定子节点下的区域树
      * @return
      */
     @GetMapping(value = "/innerApi/user/districtApi/getTreeByParentCode")
-    PageResultVo<District> getTreeByParentCode(Integer parentCode);
+    TreeVo<String> getTreeByParentCode(Integer parentCode);
 
     /**
      * 根据信息获取区域部门树
      * @return
      */
     @GetMapping(value = "/innerApi/user/districtApi/getTreeWithDept")
-    PageResultVo<District> getTreeWithDept();
+    TreeVo<String> getTreeWithDept();
 
     /**
      * 根据信息获取自定子节点下的区域部门树
      * @return
      */
     @GetMapping(value = "/innerApi/user/districtApi/getTreeWithDeptByParentCode")
-    PageResultVo<District> getTreeWithDeptByParentCode(Integer parentCode);
+    TreeVo<String> getTreeWithDeptByParentCode(Integer parentCode);
 }

@@ -1,11 +1,13 @@
 package com.userManager.user.api;
 
-import com.userManager.user.entity.District;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
+import com.base.common.vo.TreeVo;
+import com.userManager.user.entity.District;
 import feign.Param;
 import feign.RequestLine;
 import org.springframework.cloud.openfeign.FeignClient;
+
 import java.util.List;
 
 /**
@@ -72,4 +74,45 @@ public interface DistrictApi{
      */
     @RequestLine(value = "GET /innerApi/user/districtApi/getPage")
     PageResultVo<District> getPage(@Param("district") District district, @Param("pageParamsVo") PageParamsVo pageParamsVo);
+
+    /**
+     * 节点移动到指定的位置
+     * @param id 移动的节点ID
+     * @param newParentId 父节点ID
+     * @param nextNodeId 移动后当前节点后一个节点的ID，空表示当前节点为最后一个节点
+     * @return
+     */
+    @RequestLine(value = "PUT /innerApi/user/districtApi/move")
+    boolean move(@Param("id") Integer id,
+                 @Param("newParentId") Integer newParentId,
+                 @Param("nextNodeId")  Integer nextNodeId);
+
+    /**
+     * 根据信息获取区域树
+     * @return
+     */
+    @RequestLine(value = "GET /innerApi/user/districtApi/getTree")
+    TreeVo<String> getTree();
+
+    /**
+     * 根据信息获取自定子节点下的区域树
+     * @return
+     */
+    @RequestLine(value = "GET /innerApi/user/districtApi/getTreeByParentCode")
+    TreeVo<String> getTreeByParentCode(@Param("parentCode") Integer parentCode);
+
+    /**
+     * 根据信息获取区域部门树
+     * @return
+     */
+    @RequestLine(value = "GET /innerApi/user/districtApi/getTreeWithDept")
+    TreeVo<String> getTreeWithDept();
+
+    /**
+     * 根据信息获取自定子节点下的区域部门树
+     * @return
+     */
+    @RequestLine(value = "GET /innerApi/user/districtApi/getTreeWithDeptByParentCode")
+    TreeVo<String> getTreeWithDeptByParentCode(@Param("parentCode") Integer parentCode);
+
 }

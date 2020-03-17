@@ -1,13 +1,17 @@
 package com.userManager.user.controller;
 
+import com.base.common.util.ExceptionUtil;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
+import com.base.common.vo.TreeVo;
+import com.userManager.user.api.DistrictApi;
 import com.userManager.user.entity.District;
 import com.userManager.user.service.DistrictService;
-import com.userManager.user.api.DistrictApi;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 /**
@@ -29,6 +33,10 @@ public class DistrictController implements DistrictApi {
     @Override
     public District getById(String id){
         log.info("根据 id 获取区域管理信息");
+
+        if(StringUtils.isEmpty(id)){
+            ExceptionUtil.validError("id 不能为空！");
+        }
 
         District result = districtService.getById(id);
 
@@ -97,28 +105,37 @@ public class DistrictController implements DistrictApi {
     }
 
     @Override
-    public PageResultVo<District> getTree() {
+    public boolean move(Integer id, Integer newParentCode, Integer nextNodeId) {
+        log.info("根据信息获取区域管理分页信息：节点{},移动到{}的最后,移动到{}的之前", id, newParentCode, nextNodeId);
+
+        return districtService.move(id, newParentCode, nextNodeId);
+    }
+
+    @Override
+    public TreeVo<String> getTree() {
         log.info("根据信息获取区域树");
 
-        List<District> districtList = districtService.list();
-        return null;
+        return districtService.getTree();
     }
 
     @Override
-    public PageResultVo<District> getTreeByParentCode(Integer parentCode) {
+    public TreeVo<String> getTreeByParentCode(Integer parentCode) {
         log.info("根据信息获取自定子节点下的区域树");
-        return null;
+
+        return districtService.getTreeByParentCode(parentCode);
     }
 
     @Override
-    public PageResultVo<District> getTreeWithDept() {
+    public TreeVo<String> getTreeWithDept() {
         log.info("根据信息获取区域部门树");
-        return null;
+
+        return districtService.getTreeWithDept();
     }
 
     @Override
-    public PageResultVo<District> getTreeWithDeptByParentCode(Integer parentCode) {
+    public TreeVo<String> getTreeWithDeptByParentCode(Integer parentCode) {
         log.info("根据信息获取自定子节点下的区域部门树");
-        return null;
+
+        return districtService.getTreeWithDeptByParentCode(parentCode);
     }
 }

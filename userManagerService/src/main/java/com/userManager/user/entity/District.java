@@ -1,12 +1,11 @@
 package com.userManager.user.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.base.common.entity.BaseModel;
+import com.base.common.vo.TreeVo;
+import com.userManager.user.enums.DeptTreeType;
 import lombok.Data;
+
 import java.util.Date;
 /**
  * 区域管理
@@ -60,4 +59,18 @@ public class District extends BaseModel{
     @TableField("MODIFIER")
     private Integer modifier;
 
+    /**
+     * 构造树节点
+     * @return
+     */
+    public TreeVo<String> convertTreeNode(){
+        TreeVo<String> treeVo = new TreeVo<>();
+        treeVo.setId(code.toString());
+        treeVo.setName(name);
+        treeVo.setParentId(parentCode);
+        treeVo.setSortNum(sortNum);
+        treeVo.setType(DeptTreeType.DISTRICT.getCode());
+        treeVo.setData(id.toString());
+        return treeVo;
+    }
 }
