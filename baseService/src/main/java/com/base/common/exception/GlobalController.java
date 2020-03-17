@@ -57,9 +57,10 @@ public class GlobalController {
         }
 
         // 异常信息输出到日志
-        log.error("\r\nExceptionMsg:\r\n  uuid:{}\r\n  timestamp:{}\r\n  excetion:\r\n{}",
+        log.error("\r\nExceptionMsg:\r\n  uuid:{}\r\n  timestamp:{}\r\n  excetionMsg:{}\r\n  excetion:\r\n{}",
                 exceptionInfo.getUuid(),
                 exceptionInfo.getTimestamp(),
+                e.getMessage(),
                 ExceptionUtil.getStackTraceString(e));
 
         map.put("exceptionInfo", exceptionInfo);

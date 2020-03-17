@@ -1,5 +1,6 @@
 package com.base.common.controller;
 
+import com.base.common.enums.ErrorMsgType;
 import com.base.common.enums.HttpCode;
 import com.base.common.exception.ServiceException;
 import com.base.common.util.ExceptionUtil;
@@ -92,15 +93,22 @@ public class BaseController {
             String uuid = UUIDUtils.getUUID();
 
             // 异常信息输出到日志
-            log.error("服务器出现错误：\r\nuuid:{}\r\ntimestamp:{}\r\n  excetion:\r\n{}",
+            log.error("服务器出现错误：\r\nuuid:{}\r\ntimestamp:{}\r\n  excetionMsg:{}\r\n  excetion:\r\n{}",
                     uuid,
                     System.currentTimeMillis(),
+                    ex.getMessage(),
                     ExceptionUtil.getStackTraceString(ex));
 
             errorMsg.put("message", ex.getMessage());
             errorMsg.put("errorUUID", uuid);
 
             response.setData(errorMsg);
+        }
+
+        // 如果是系统错误
+        if(response.getCode() == 500){
+            // 对错误信息进行映射处理
+            errorMsg.put("message", ErrorMsgType.getErrorMsg(errorMsg.get("message")));
         }
 
         return new ResponseEntity(response, HttpStatus.OK);
