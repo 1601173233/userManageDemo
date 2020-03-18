@@ -17,7 +17,7 @@ import java.util.List;
  * @author huangyujie
  * @version 2019/7/11
  */
-public class BaseServiceImpl<T extends BaseModel, MAPPER extends BaseCommonMapper<T>>
+public class BaseServiceImpl<MAPPER extends BaseCommonMapper<T>, T extends BaseModel>
         extends ServiceImpl<MAPPER, T> implements BaseService<T> {
 
     @Override
