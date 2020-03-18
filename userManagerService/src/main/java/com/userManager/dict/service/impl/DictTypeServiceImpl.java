@@ -4,7 +4,6 @@ import com.base.common.service.impl.BaseServiceImpl;
 import com.userManager.dict.entity.DictType;
 import com.userManager.dict.mapper.DictTypeMapper;
 import com.userManager.dict.service.DictTypeService;
-import com.base.common.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DictTypeServiceImpl
-        extends BaseServiceImpl<DictType, DictTypeMapper> implements DictTypeService {
+        extends BaseServiceImpl<DictTypeMapper, DictType> implements DictTypeService {
 
 
 }

@@ -94,7 +94,7 @@ public class UserRoleController extends BaseController {
      */
     @ApiOperation(value = "根据角色ID获取用户列表",notes = "根据角色ID获取用户列表")
     @ApiImplicitParam(name="roleId", value ="角色ID", required = true, dataType = "int", paramType = "query")
-    @GetMapping("/selectByRoleId")
+    @GetMapping("/selectUserByRoleId")
     public ResponseEntity<Response<List<User>>> selectUserByRoleId(Integer roleId){
         log.info("根据角色ID获取用户列表");
 

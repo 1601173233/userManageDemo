@@ -4,7 +4,6 @@ import com.base.common.service.impl.BaseServiceImpl;
 import com.userManager.auth.entity.Auth;
 import com.userManager.auth.mapper.AuthMapper;
 import com.userManager.auth.service.AuthService;
-import com.base.common.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AuthServiceImpl
-        extends BaseServiceImpl<Auth, AuthMapper> implements AuthService {
+        extends BaseServiceImpl<AuthMapper, Auth> implements AuthService {
 
 
 }

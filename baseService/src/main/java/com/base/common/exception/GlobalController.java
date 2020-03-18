@@ -44,7 +44,9 @@ public class GlobalController {
         exceptionInfo.setTimestamp(System.currentTimeMillis() + "");
         exceptionInfo.setUuid(UUIDUtils.getUUID());
         exceptionInfo.setMessage(e.getMessage());
-        exceptionInfo.setPath(e.getStackTrace()[0].getClassName() + "." + e.getStackTrace()[0].getMethodName() + ":" + e.getStackTrace()[0].getLineNumber());
+        if(e.getStackTrace() != null) {
+            exceptionInfo.setPath(e.getStackTrace()[0].getClassName() + "." + e.getStackTrace()[0].getMethodName() + ":" + e.getStackTrace()[0].getLineNumber());
+        }
         exceptionInfo.setException(e.getClass().getName());
         exceptionInfo.setServiceName(instanceId); // 实例名称
 

@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl
-        extends BaseServiceImpl<User, UserMapper> implements UserService {
+        extends BaseServiceImpl<UserMapper, User> implements UserService {
 
 
     @Override

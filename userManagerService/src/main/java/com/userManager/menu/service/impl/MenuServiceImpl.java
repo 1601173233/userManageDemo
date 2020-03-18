@@ -4,7 +4,6 @@ import com.base.common.service.impl.BaseServiceImpl;
 import com.userManager.menu.entity.Menu;
 import com.userManager.menu.mapper.MenuMapper;
 import com.userManager.menu.service.MenuService;
-import com.base.common.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MenuServiceImpl
-        extends BaseServiceImpl<Menu, MenuMapper> implements MenuService {
+        extends BaseServiceImpl<MenuMapper, Menu> implements MenuService {
 
 
 }

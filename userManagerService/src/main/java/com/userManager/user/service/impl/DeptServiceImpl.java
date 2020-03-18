@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DeptServiceImpl
-        extends BaseServiceImpl<Dept, DeptMapper> implements DeptService {
+        extends BaseServiceImpl<DeptMapper, Dept> implements DeptService {
     @Autowired
     private DistrictService districtService;
 

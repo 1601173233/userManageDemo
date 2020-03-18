@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Service
 public class UserRoleServiceImpl
-        extends BaseServiceImpl<UserRole, UserRoleMapper> implements UserRoleService {
+        extends BaseServiceImpl<UserRoleMapper, UserRole> implements UserRoleService {
 
     @Value("${userManagerService.mybatisBatchSize}")
     private Integer mybatisBatchSize;
@@ -68,6 +68,7 @@ public class UserRoleServiceImpl
         }
 
         UserRole userRole = new UserRole();
+        userRole.setUserId(userId);
 
         // 先删除原来所有的权限
         Wrapper<UserRole> userDeptWrapper = new QueryWrapper<>(userRole);

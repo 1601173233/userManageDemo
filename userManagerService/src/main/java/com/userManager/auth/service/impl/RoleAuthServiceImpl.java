@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Service
 public class RoleAuthServiceImpl
-        extends BaseServiceImpl<RoleAuth, RoleAuthMapper> implements RoleAuthService {
+        extends BaseServiceImpl<RoleAuthMapper, RoleAuth> implements RoleAuthService {
 
     @Value("${userManagerService.mybatisBatchSize}")
     private Integer mybatisBatchSize;
@@ -46,6 +46,7 @@ public class RoleAuthServiceImpl
         }
 
         RoleAuth roleAuth = new RoleAuth();
+        roleAuth.setRoleId(roleId);
 
         // 先删除原来所有的权限
         Wrapper<RoleAuth> roleAuthWrapper = new QueryWrapper<>(roleAuth);

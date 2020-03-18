@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Service
 public class DistrictServiceImpl
-        extends BaseServiceImpl<District, DistrictMapper> implements DistrictService {
+        extends BaseServiceImpl<DistrictMapper, District> implements DistrictService {
     @Autowired
     private DeptService deptService;
 

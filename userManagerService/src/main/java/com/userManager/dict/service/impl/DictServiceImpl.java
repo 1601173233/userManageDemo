@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Service
 public class DictServiceImpl
-        extends BaseServiceImpl<Dict, DictMapper> implements DictService {
+        extends BaseServiceImpl<DictMapper, Dict> implements DictService {
 
     @Autowired
     DictTypeService dictTypeService;

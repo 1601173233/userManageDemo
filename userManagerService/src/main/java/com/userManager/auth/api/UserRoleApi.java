@@ -25,7 +25,7 @@ public interface UserRoleApi{
     /**
      * 根据角色ID获取用户列表
      */
-    @GetMapping(value = "/innerApi/auth/userDeptApi/selectUserByRoleId")
+    @GetMapping(value = "/innerApi/auth/userRoleApi/selectUserByRoleId")
     List<User> selectUserByRoleId(Integer roleId);
 
     /**

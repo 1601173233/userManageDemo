@@ -4,7 +4,6 @@ import com.base.common.service.impl.BaseServiceImpl;
 import com.userManager.log.entity.OperationLog;
 import com.userManager.log.mapper.OperationLogMapper;
 import com.userManager.log.service.OperationLogService;
-import com.base.common.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OperationLogServiceImpl
-        extends BaseServiceImpl<OperationLog, OperationLogMapper> implements OperationLogService {
+        extends BaseServiceImpl<OperationLogMapper, OperationLog> implements OperationLogService {
 
 
 }
