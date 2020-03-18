@@ -1,19 +1,21 @@
 package com.userManager.dict.controller;
 
-import com.userManager.dict.entity.Dict;
-import com.userManager.dict.api.DictApi;
 import com.base.common.controller.BaseController;
+import com.base.common.validType.Insert;
+import com.base.common.validType.Update;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
 import com.base.common.vo.Response;
+import com.base.common.vo.TreeVo;
+import com.userManager.dict.api.DictApi;
+import com.userManager.dict.entity.Dict;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.base.common.validType.Insert;
-import com.base.common.validType.Update;
+
 import java.util.List;
 
 /**
@@ -148,5 +150,37 @@ public class DictController extends BaseController {
         PageResultVo<Dict> page = dictApi.getPage(dict, pageParamsVo);
 
         return responseOk(page);
+    }
+
+    /**
+     * 节点移动到指定的父节点
+     * @param id 移动的节点ID
+     * @param newParentId 父节点ID
+     */
+    @ApiOperation(value = "节点移动到指定的父节点")
+    @PutMapping("/move")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="id", value ="移动的节点ID", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name="newParentId", value ="父节点ID", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name="nextNodeId", value ="移动后当前节点后一个节点的ID，空表示当前节点为最后一个节点", dataType = "int", paramType = "query")
+    })
+    public ResponseEntity<Response> move(Integer id, Integer newParentId, Integer nextNodeId){
+        log.info("节点移动到指定的父节点：节点{},移动到{}的最后", id, newParentId);
+        boolean result = dictApi.move(id, newParentId, nextNodeId);
+        return updateResponse(result);
+    }
+
+    /**
+     * 根据字典类型获取字典树
+     * @param type 字典类型
+     * @return
+     */
+    @ApiOperation(value = "根据字典类型获取字典树")
+    @GetMapping("/getTreeByDictType")
+    @ApiImplicitParam(name="type", value ="字典类型", required = true, dataType = "String", paramType = "query")
+    public ResponseEntity<Response<TreeVo<Dict>>> getTreeByDictType(String type){
+        log.info("根据字典类型获取字典树");
+        TreeVo<Dict> treeVo = dictApi.getTreeByDictType(type);
+        return responseOk(treeVo);
     }
 }

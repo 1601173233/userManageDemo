@@ -19,13 +19,13 @@ public class OperationLog extends BaseModel{
     @ApiModelProperty(value="id")
     private Integer id;
 
-    /** 被操作者ID */
-    @ApiModelProperty(value="被操作者ID")
-    private String subjectId;
-
-    /** 操作ID */
-    @ApiModelProperty(value="操作ID")
+    /** 操作人ID */
+    @ApiModelProperty(value="操作人ID")
     private Integer operatedId;
+
+    /** 操作信息 */
+    @ApiModelProperty(value="操作信息")
+    private String msg;
 
     /** 操作类型:详细参见字典OPERATION_TYPE */
     @ApiModelProperty(value="操作类型:详细参见字典OPERATION_TYPE")

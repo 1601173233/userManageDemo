@@ -2,10 +2,11 @@ package com.userManager.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.common.service.impl.BaseServiceImpl;
+import com.base.common.util.CommonModelUtils;
 import com.base.common.util.ExceptionUtil;
 import com.userManager.user.entity.Dept;
 import com.userManager.user.entity.District;
-import com.userManager.user.enums.DeptParentType;
+import com.userManager.user.enums.DeptNodeType;
 import com.userManager.user.mapper.DeptMapper;
 import com.userManager.user.service.DeptService;
 import com.userManager.user.service.DistrictService;
@@ -40,11 +41,11 @@ public class DeptServiceImpl
 
         if(dept.getParentType() == null){
             ExceptionUtil.validError("父节点类型不能为空");
-        }else if(dept.getParentType().equals(DeptParentType.DISTRICT.getCode())){
+        }else if(dept.getParentType().equals(DeptNodeType.DISTRICT.getCode())){
             // 如果父节点是行政区,默认父部门编码为0
             districtCode = dept.getParentCode();
             parentCode = "0";
-        }else if(dept.getParentType().equals(DeptParentType.DEPT.getCode())){
+        }else if(dept.getParentType().equals(DeptNodeType.DEPT.getCode())){
             // 如果父节点是部门，那么行政区跟父部门的行政区一致
             parentCode = dept.getParentCode();
 
@@ -69,28 +70,7 @@ public class DeptServiceImpl
      */
     public String getNextCode(String parentCode){
         String maxCode = baseMapper.getMaxCodeByParentCode(parentCode);
-
-        // 如果当前父节点不存在子节点
-        if(maxCode == null){
-            // 如果父节点是默认节点
-            if(parentCode.equals("0")){
-                maxCode = "01";
-            }else{
-                maxCode = parentCode + "01";
-            }
-        }else{
-            // 否则节点序号 + 1
-            Integer maxCodeNum = Integer.parseInt(maxCode.substring(maxCode.length() - 2, maxCode.length()));
-            maxCodeNum = maxCodeNum + 1;
-            maxCode = maxCodeNum >= 10 ? maxCodeNum.toString() : "0" + maxCodeNum;
-
-            // 把父节点序号补充回去
-            if(!parentCode.equals("0")){
-                maxCode = parentCode + maxCode;
-            }
-        }
-
-        return maxCode;
+        return CommonModelUtils.getNextCode(parentCode, maxCode);
     }
 
     /**
@@ -118,7 +98,7 @@ public class DeptServiceImpl
         // 判断当前的父节点类型，获取对应的父节点编码和行政区编码
         if(parentType == null){
             ExceptionUtil.validError("父节点类型不能为空");
-        }else if(parentType.equals(DeptParentType.DISTRICT.getCode())){
+        }else if(parentType.equals(DeptNodeType.DISTRICT.getCode())){
             // 如果父节点是行政区,默认父部门编码为0
             // 如果是行政区的根节点,行政区编码为0
             if(newParentId.equals(0)) {
@@ -129,7 +109,7 @@ public class DeptServiceImpl
             }
 
             parentCode = "0";
-        }else if(parentType.equals(DeptParentType.DEPT.getCode())){
+        }else if(parentType.equals(DeptNodeType.DEPT.getCode())){
             // 如果父节点是部门，那么行政区跟父部门的行政区一致
             Dept parentDept = getById(newParentId);
 

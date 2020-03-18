@@ -23,17 +23,25 @@ public class Dict extends BaseModel{
     @ApiModelProperty(value="字典名称")
     private String name;
 
-    /** 字典类型编码 */
-    @ApiModelProperty(value="字典类型编码")
+    /** 编码 */
+    @ApiModelProperty(value="编码")
     private String code;
+
+    /** 自定义编码 */
+    @ApiModelProperty(value="自定义编码")
+    private String custCode;
+
+    /** 字典类型ID */
+    @ApiModelProperty(value="字典类型ID")
+    private Integer dictTypeId;
 
     /** 排序号 */
     @ApiModelProperty(value="排序号")
-    private int sortNum;
+    private Integer sortNum;
 
-    /** 父字典ID */
-    @ApiModelProperty(value="父字典ID")
-    private Integer parentId;
+    /** 父字典编码 */
+    @ApiModelProperty(value="父字典编码")
+    private String parentCode;
 
     /** 字典描述 */
     @ApiModelProperty(value="字典描述")
@@ -59,4 +67,11 @@ public class Dict extends BaseModel{
     @ApiModelProperty(value="修改人")
     private Integer modifier;
 
+    /** 字典类型 */
+    @ApiModelProperty(value="字典类型")
+    private String dictType;
+
+    /** 字典类型描述 */
+    @ApiModelProperty(value="字典类型描述")
+    private String dictTypeDesc;
 }

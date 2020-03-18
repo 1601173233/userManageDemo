@@ -166,7 +166,7 @@ public class DeptController extends BaseController {
             @ApiImplicitParam(name="nextNodeId", value ="移动后当前节点后一个节点的ID，空表示当前节点为最后一个节点（不能移动到区域的前面）", dataType = "int", paramType = "query")
     })
     public ResponseEntity<Response> move(Integer id, Integer newParentId, Integer parentType, Integer nextNodeId){
-        log.info("根据信息获取区域管理分页信息：节点{},移动到{}的最后", id, newParentId);
+        log.info("节点移动到指定的父节点：节点{},移动到{}的最后", id, newParentId);
         boolean result = deptApi.move(id, newParentId, parentType ,nextNodeId);
         return updateResponse(result);
     }

@@ -2,6 +2,7 @@ package com.userManager.dict.controller;
 
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
+import com.base.common.vo.TreeVo;
 import com.userManager.dict.entity.Dict;
 import com.userManager.dict.service.DictService;
 import com.userManager.dict.api.DictApi;
@@ -94,5 +95,15 @@ public class DictController implements DictApi {
         PageResultVo<Dict> page = dictService.getPage(dict, pageParamsVo);
 
         return page;
+    }
+
+    @Override
+    public boolean move(Integer id, Integer newParentId, Integer nextNodeId) {
+        return dictService.move(id, newParentId, nextNodeId);
+    }
+
+    @Override
+    public TreeVo<Dict> getTreeByDictType(String type) {
+        return dictService.getTreeByDictType(type);
     }
 }

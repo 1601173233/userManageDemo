@@ -4,8 +4,9 @@ import com.base.common.service.impl.BaseServiceImpl;
 import com.userManager.user.entity.User;
 import com.userManager.user.mapper.UserMapper;
 import com.userManager.user.service.UserService;
-import com.base.common.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 用户服务接口
@@ -19,4 +20,8 @@ public class UserServiceImpl
         extends BaseServiceImpl<User, UserMapper> implements UserService {
 
 
+    @Override
+    public List<User> selectByUserIdList(List<Integer> userIdList) {
+        return baseMapper.selectBatchIds(userIdList);
+    }
 }

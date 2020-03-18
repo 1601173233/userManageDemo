@@ -3,7 +3,7 @@ package com.userManager.user.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.base.common.entity.BaseModel;
 import com.base.common.vo.TreeVo;
-import com.userManager.user.enums.DeptParentType;
+import com.userManager.user.enums.DeptNodeType;
 import lombok.Data;
 
 import java.util.Date;
@@ -69,8 +69,8 @@ public class District extends BaseModel{
         treeVo.setName(name);
         treeVo.setParentId(parentCode);
         treeVo.setSortNum(sortNum);
-        treeVo.setType(DeptParentType.DISTRICT.getCode().toString());
-        treeVo.setParentType(DeptParentType.DISTRICT.getCode().toString());
+        treeVo.setType(DeptNodeType.DISTRICT.getCode().toString());
+        treeVo.setParentType(DeptNodeType.DISTRICT.getCode().toString());
         treeVo.setData(id.toString());
         return treeVo;
     }

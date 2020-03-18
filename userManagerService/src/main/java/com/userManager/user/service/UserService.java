@@ -1,7 +1,9 @@
 package com.userManager.user.service;
 
-import com.userManager.user.entity.User;
 import com.base.common.service.BaseService;
+import com.userManager.user.entity.User;
+
+import java.util.List;
 
 /**
  * 用户服务接口
@@ -11,6 +13,9 @@ import com.base.common.service.BaseService;
  * @since
  */
 public interface UserService extends BaseService<User>{
-
+    /**
+     * 根据用户ID列表查询用户数据
+     */
+    List<User> selectByUserIdList(List<Integer> userIdList);
 
 }

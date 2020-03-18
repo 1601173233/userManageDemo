@@ -25,7 +25,7 @@ public class DictType extends BaseModel{
 
     /** 字典类型编码 */
     @ApiModelProperty(value="字典类型编码")
-    private Integer code;
+    private String dictType;
 
     /** 删除标志（0：未删除，1：已删除） */
     @ApiModelProperty(value="删除标志（0：未删除，1：已删除）")

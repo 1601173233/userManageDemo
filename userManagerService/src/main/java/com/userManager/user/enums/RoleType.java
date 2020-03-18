@@ -1,22 +1,22 @@
 package com.userManager.user.enums;
 
 /**
- * 部门父节点类型
+ * 角色类型
  *
  * @author huangyujie
  * @version 2019/7/11
  */
-public enum DeptParentType {
-    /** 行政区 */
-    DISTRICT(1),
-    /** 部门 */
+public enum RoleType {
+    /** 系统角色 */
+    SYSTEM(1),
+    /** 部门角色 */
     DEPT(2);
 
     /**
      * 构造方法
      * @param code
      */
-    DeptParentType(Integer code){
+    RoleType(Integer code){
         this.code = code;
     }
 

@@ -73,7 +73,7 @@
         UPDATE DEPT
            SET SORT_NUM = SORT_NUM + #{increaseCount}
          WHERE SORT_NUM >= #{startSortNum}
-               <![CDATA[AND SORT_NUM <= #{endSortNum}]]>
+  <![CDATA[AND SORT_NUM <= #{endSortNum}]]>
            AND PARENT_CODE = #{parentCode}
     </update>
 

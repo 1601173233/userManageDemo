@@ -2,12 +2,13 @@ package com.userManager.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.common.service.impl.BaseServiceImpl;
+import com.base.common.util.CommonModelUtils;
 import com.base.common.util.ExceptionUtil;
 import com.base.common.util.TreeUtil;
 import com.base.common.vo.TreeVo;
 import com.userManager.user.entity.Dept;
 import com.userManager.user.entity.District;
-import com.userManager.user.enums.DeptParentType;
+import com.userManager.user.enums.DeptNodeType;
 import com.userManager.user.mapper.DistrictMapper;
 import com.userManager.user.service.DeptService;
 import com.userManager.user.service.DistrictService;
@@ -126,28 +127,7 @@ public class DistrictServiceImpl
      */
     public String getNextCode(String parentCode){
         String maxCode = baseMapper.getMaxCodeByParentCode(parentCode);
-
-        // 如果当前父节点不存在子节点
-        if(maxCode == null){
-            // 如果父节点是默认节点
-            if(parentCode.equals("0")){
-                maxCode = "01";
-            }else{
-                maxCode = parentCode + "01";
-            }
-        }else{
-            // 否则节点序号 + 1
-            Integer maxCodeNum = Integer.parseInt(maxCode.substring(maxCode.length() - 2, maxCode.length()));
-            maxCodeNum = maxCodeNum + 1;
-            maxCode = maxCodeNum >= 10 ? maxCodeNum.toString() : "0" + maxCodeNum;
-
-            // 把父节点序号补充回去
-            if(!parentCode.equals("0")){
-                maxCode = parentCode + maxCode;
-            }
-        }
-
-        return maxCode;
+        return CommonModelUtils.getNextCode(parentCode, maxCode);
     }
 
     /**
@@ -274,7 +254,7 @@ public class DistrictServiceImpl
         }
 
         // 树节点构造为树结构
-        treeVoList = TreeUtil.bulidTree(treeVoList, parentCode, DeptParentType.DISTRICT.getCode().toString(),true);
+        treeVoList = TreeUtil.bulidTree(treeVoList, parentCode, DeptNodeType.DISTRICT.getCode().toString(),true);
         parentTreeVo.setChildrens(treeVoList);
         return parentTreeVo;
     }

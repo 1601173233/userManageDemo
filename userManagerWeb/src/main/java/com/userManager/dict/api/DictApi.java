@@ -1,11 +1,14 @@
 package com.userManager.dict.api;
 
-import com.userManager.dict.entity.Dict;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
+import com.base.common.vo.TreeVo;
+import com.userManager.dict.entity.Dict;
 import feign.Param;
 import feign.RequestLine;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PutMapping;
+
 import java.util.List;
 
 /**
@@ -72,4 +75,25 @@ public interface DictApi{
      */
     @RequestLine(value = "GET /innerApi/dict/dictApi/getPage")
     PageResultVo<Dict> getPage(@Param("dict") Dict dict, @Param("pageParamsVo") PageParamsVo pageParamsVo);
+
+    /**
+     * 节点移动到指定的父节点
+     * @param id 移动的节点ID
+     * @param newParentId 父节点ID
+     * @param nextNodeId 移动后当前节点后一个节点的ID，空表示当前节点为最后一个节点
+     * @return
+     */
+    @PutMapping(value = "/innerApi/user/dictApi/move")
+    @RequestLine(value = "PUT /innerApi/dict/dictApi/move")
+    boolean move(@Param("id") Integer id,
+                 @Param("newParentId") Integer newParentId,
+                 @Param("nextNodeId") Integer nextNodeId);
+
+    /**
+     * 根据字典类型获取字典树
+     * @param type 字典类型
+     * @return
+     */
+    @RequestLine(value = "GET /innerApi/dict/dictApi/getTreeByDictType")
+    TreeVo<Dict> getTreeByDictType(@Param("type") String type);
 }

@@ -1,11 +1,13 @@
 package com.userManager.auth.api;
 
-import com.userManager.auth.entity.RoleAuth;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
+import com.userManager.auth.entity.RoleAuth;
 import feign.Param;
 import feign.RequestLine;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestPart;
+
 import java.util.List;
 
 /**
@@ -18,58 +20,15 @@ import java.util.List;
 @FeignClient(name = "${serviceName.gateway}/${serviceName.userManage}")
 public interface RoleAuthApi{
     /**
-     * 根据 id 获取角色授权表信息
-     * @param id
-     * @return
+     * 根据角色ID获取角色拥有的权限列表
      */
-    @RequestLine(value = "GET /innerApi/auth/roleAuthApi/getById")
-    RoleAuth getById(@Param("id") String id);
+    @RequestLine(value = "GET /innerApi/auth/roleAuthApi/selectByRoleId")
+    List<RoleAuth> selectByRoleId(@Param("roleId") Integer roleId);
 
     /**
-     * 根据 id 删除角色授权表信息
-     * @param id
-     * @return
+     * 给某个角色设置权限
      */
-    @RequestLine(value = "DELETE /innerApi/auth/roleAuthApi/removeById")
-    boolean removeById(@Param("id") String id);
-
-    /**
-     * 新增角色授权表信息
-     * @param roleAuth 角色授权表信息
-     * @return
-     */
-    @RequestLine(value = "PUT /innerApi/auth/roleAuthApi/save")
-    boolean save(@Param("roleAuth") RoleAuth roleAuth);
-
-    /**
-     * 更新角色授权表信息
-     * @param roleAuth 角色授权表信息
-     * @return
-     */
-    @RequestLine(value = "POST /innerApi/auth/roleAuthApi/updateById")
-    boolean updateById(@Param("roleAuth") RoleAuth roleAuth);
-
-    /**
-     * 根据信息获取角色授权表信息单个对象
-     * @param roleAuth 角色授权表信息
-     * @return
-     */
-    @RequestLine(value = "GET /innerApi/auth/roleAuthApi/selectOne")
-    RoleAuth selectOne(@Param("roleAuth") RoleAuth roleAuth);
-
-    /**
-     * 根据信息获取角色授权表信息列表
-     * @param roleAuth 角色授权表信息
-     * @return
-     */
-    @RequestLine(value = "GET /innerApi/auth/roleAuthApi/select")
-    List<RoleAuth> select(@Param("roleAuth") RoleAuth roleAuth);
-
-    /**
-     * 根据信息获取角色授权表分页信息
-     * @param pageParamsVo 分页参数
-     * @return
-     */
-    @RequestLine(value = "GET /innerApi/auth/roleAuthApi/getPage")
-    PageResultVo<RoleAuth> getPage(@Param("roleAuth") RoleAuth roleAuth, @Param("pageParamsVo") PageParamsVo pageParamsVo);
+    @RequestLine(value = "POST /innerApi/auth/roleAuthApi/setAuth")
+    Boolean setAuth(@Param("roleId") Integer roleId,
+                    @Param(value = "authIdList") List<Integer> authIdList);
 }

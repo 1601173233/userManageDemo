@@ -1,8 +1,8 @@
 package com.userManager.auth.mapper;
 
-import com.userManager.auth.entity.UseDept;
-import org.springframework.stereotype.Component;
 import com.base.common.mapper.BaseCommonMapper;
+import com.userManager.auth.entity.UserDept;
+import org.springframework.stereotype.Component;
 
 /**
  * 用户的部门持久层接口
@@ -12,7 +12,7 @@ import com.base.common.mapper.BaseCommonMapper;
  * @since
  */
 @Component
-public interface UseDeptMapper extends BaseCommonMapper<UseDept>{
+public interface UserDeptMapper extends BaseCommonMapper<UserDept>{
 
 
 }

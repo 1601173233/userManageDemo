@@ -1,10 +1,12 @@
 package com.userManager.auth.api;
 
-import com.base.common.vo.PageParamsVo;
-import com.base.common.vo.PageResultVo;
 import com.userManager.auth.entity.UserRole;
+import com.userManager.user.entity.User;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+
 import java.util.List;
-import org.springframework.web.bind.annotation.*;
 
 /**
  * 用户的角色对外接口
@@ -15,59 +17,21 @@ import org.springframework.web.bind.annotation.*;
  */
 public interface UserRoleApi{
     /**
-     * 根据 id 获取用户的角色信息
-     * @param id
-     * @return
+     * 根据用户ID获取用户对应的角色列表
      */
-    @GetMapping(value = "/innerApi/auth/userRoleApi/getById")
-    UserRole getById(String id);
+    @GetMapping(value = "/innerApi/auth/userRoleApi/selectByUserId")
+    List<UserRole> selectByUserId(Integer userId);
 
     /**
-     * 根据 id 删除用户的角色信息
-     * @param id
-     * @return
+     * 根据角色ID获取用户列表
      */
-    @DeleteMapping(value = "/innerApi/auth/userRoleApi/removeById")
-    boolean removeById(String id);
+    @GetMapping(value = "/innerApi/auth/userDeptApi/selectUserByRoleId")
+    List<User> selectUserByRoleId(Integer roleId);
 
     /**
-     * 新增用户的角色信息
-     * @param userRole 用户的角色信息
-     * @return
+     * 给某个用户设置角色
      */
-    @PutMapping(value = "/innerApi/auth/userRoleApi/save")
-    boolean save(@RequestPart("userRole") UserRole userRole);
-
-    /**
-     * 更新用户的角色信息
-     * @param userRole 用户的角色信息
-     * @return
-     */
-    @PostMapping(value = "/innerApi/auth/userRoleApi/updateById")
-    boolean updateById(@RequestPart("userRole") UserRole userRole);
-
-    /**
-     * 根据信息获取用户的角色信息单个对象
-     * @param userRole 用户的角色信息
-     * @return
-     */
-    @GetMapping(value = "/innerApi/userRoleApi/selectOne")
-    UserRole selectOne(@RequestPart("userRole") UserRole userRole);
-
-    /**
-     * 根据信息获取用户的角色信息列表
-     * @param userRole 用户的角色信息
-     * @return
-     */
-    @GetMapping(value = "/innerApi/auth/userRoleApi/select")
-    List<UserRole> select(@RequestPart("userRole") UserRole userRole);
-
-    /**
-     * 根据信息获取用户的角色分页信息
-     * @param pageParamsVo 分页参数
-     * @return
-     */
-    @GetMapping(value = "/innerApi/auth/userRoleApi/getPage")
-    PageResultVo<UserRole> getPage(@RequestPart("userRole") UserRole userRole,
-                                            @RequestPart("pageParamsVo") PageParamsVo pageParamsVo);
+    @PostMapping(value = "/innerApi/auth/userRoleApi/setRole")
+    Boolean setRole(@RequestPart(value = "userId") Integer userId,
+                    @RequestPart(value = "roleIdList", required = false) List<Integer> roleIdList);
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.userManager.auth.mapper.UserDeptMapper" >
+    <resultMap id="BaseResultMap" type="com.userManager.auth.entity.UserDept" >
+            <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+            <result column="DEPT_ID" property="deptId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <!-- 定义查询的字段 -->
+    <sql id="Base_Column_List" >
+            A.USER_ID,
+            A.DEPT_ID
+    </sql>
+</mapper>

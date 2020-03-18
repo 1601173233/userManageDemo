@@ -3,7 +3,7 @@ package com.userManager.user.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.base.common.entity.BaseModel;
 import com.base.common.vo.TreeVo;
-import com.userManager.user.enums.DeptParentType;
+import com.userManager.user.enums.DeptNodeType;
 import lombok.Data;
 
 import java.util.Date;
@@ -80,16 +80,16 @@ public class Dept extends BaseModel{
         treeVo.setId(code);
         treeVo.setName(name);
         treeVo.setSortNum(sortNum);
-        treeVo.setType(DeptParentType.DEPT.getCode().toString());
+        treeVo.setType(DeptNodeType.DEPT.getCode().toString());
         treeVo.setData(id.toString());
 
         // 如果父部门编码为0，那么父节点是区域，否则是部门
         if(parentCode.equals("0")) {
             treeVo.setParentId(districtCode);
-            treeVo.setParentType(DeptParentType.DISTRICT.getCode().toString());
+            treeVo.setParentType(DeptNodeType.DISTRICT.getCode().toString());
         }else{
             treeVo.setParentId(parentCode);
-            treeVo.setParentType(DeptParentType.DEPT.getCode().toString());
+            treeVo.setParentType(DeptNodeType.DEPT.getCode().toString());
         }
 
         return treeVo;

@@ -165,7 +165,7 @@ public class DistrictController extends BaseController {
         @ApiImplicitParam(name="nextNodeId", value ="移动后当前节点后一个节点的ID，空表示当前节点为最后一个节点", dataType = "int", paramType = "query")
     })
     public ResponseEntity<Response> move(Integer id, Integer newParentId, Integer nextNodeId){
-        log.info("根据信息获取区域管理分页信息：节点{},移动到{}的最后", id, newParentId);
+        log.info("节点移动到指定的父节点：节点{},移动到{}的最后", id, newParentId);
         boolean result = districtApi.move(id, newParentId, nextNodeId);
         return updateResponse(result);
     }

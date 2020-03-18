@@ -1,19 +1,22 @@
 package com.userManager.auth.controller;
 
-import com.userManager.auth.entity.UserRole;
-import com.userManager.auth.api.UserRoleApi;
 import com.base.common.controller.BaseController;
-import com.base.common.vo.PageParamsVo;
-import com.base.common.vo.PageResultVo;
+import com.base.common.util.ExceptionUtil;
 import com.base.common.vo.Response;
+import com.userManager.auth.api.UserRoleApi;
+import com.userManager.auth.entity.UserRole;
+import com.userManager.user.entity.User;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import com.base.common.validType.Insert;
-import com.base.common.validType.Update;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,117 +39,68 @@ public class UserRoleController extends BaseController {
     UserRoleApi userRoleApi;
 
     /**
-     * 根据 id 获取用户的角色信息
-     * @param id
+     * 给某个用户设置角色
+     * @param userId 用户ID
+     * @param roleIds 角色ID，用逗号拼接
      * @return
      */
-    @ApiOperation(value = "根据 id 获取用户的角色信息",notes = "根据 id 获取用户的角色信息")
-    @ApiImplicitParam(name="id", value ="id", required = true, dataType = "String", paramType = "query")
-    @GetMapping("/getById")
-    public ResponseEntity<Response<UserRole>> getById(String id){
-        log.info("根据 id 获取用户的角色信息");
+    @ApiOperation(value = "给某个用户设置角色",notes = "给某个用户设置角色")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="userId", value ="用户ID", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name="roleIds", value ="角色ID，用逗号拼接", dataType = "String", paramType = "query")
+    })
+    @PostMapping("/setDept")
+    public ResponseEntity<Response> setDept(Integer userId, String roleIds){
+        log.info("给某个用户设置角色");
 
-        UserRole result = userRoleApi.getById(id);
+        List<Integer> roleIdList = new ArrayList<>();
+        if(StringUtils.isNotEmpty(roleIds)){
+            try{
+                String[] roleIdArray = roleIds.split(",");
+                for(String roleId : roleIdArray){
+                    roleIdList.add(Integer.parseInt(roleId));
+                }
+            }catch (Exception e){
+                ExceptionUtil.validError("请输出正确的角色ID！");
+            }
+        }
 
-        // 根据id获取记录
-        return responseOk(result);
-    }
-
-    /**
-     * 根据 id 删除用户的角色信息
-     * @param id
-     * @return
-     */
-    @ApiOperation(value = "根据 id 删除用户的角色信息",notes = "根据 id 删除用户的角色信息")
-    @ApiImplicitParam(name="id", value ="id", required = true, dataType = "String", paramType = "query")
-    @DeleteMapping("/removeById")
-    public ResponseEntity<Response> removeById(String id){
-        log.info("根据 id 删除用户的角色信息");
-
-        // 删除对应的记录
-        boolean result = userRoleApi.removeById(id);
+        boolean result = userRoleApi.setRole(userId, roleIdList);
 
         return updateResponse(result);
     }
 
     /**
-     * 新增用户的角色信息
-     * @param userRole 用户的角色信息
+     * 根据用户ID获取用户对应的角色列表
+     * @param userId 用户ID
      * @return
      */
-    @ApiOperation(value = "新增用户的角色信息",notes = "新增用户的角色信息")
-    @PostMapping("/save")
-    public ResponseEntity<Response> save(@Validated({Insert.class}) UserRole userRole){
-        log.info("新增用户的角色信息");
+    @ApiOperation(value = "根据用户ID获取用户对应的角色列表",notes = "根据用户ID获取用户对应的角色列表")
+    @ApiImplicitParam(name="userId", value ="用户ID", required = true, dataType = "int", paramType = "query")
+    @GetMapping("/selectByUserId")
+    public ResponseEntity<Response<List<UserRole>>> selectByUserId(Integer userId){
+        log.info("根据用户ID获取用户对应的角色列表");
 
-        // 新增一条记录
-        boolean result = userRoleApi.save(userRole);
+        // 根据用户ID获取用户对应的部门列表
+        List<UserRole> userDeptList = userRoleApi.selectByUserId(userId);
 
-        return updateResponse(result);
+        return responseOk(userDeptList);
     }
 
     /**
-     * 更新用户的角色信息
-     * @param userRole 用户的角色信息
+     * 根据角色ID获取用户列表
+     * @param roleId 角色ID
      * @return
      */
-    @ApiOperation(value = "更新用户的角色信息",notes = "更新用户的角色信息")
-    @PutMapping("/updateById")
-    public ResponseEntity<Response> updateById(@Validated({Update.class}) UserRole userRole){
-        log.info("更新用户的角色信息");
+    @ApiOperation(value = "根据角色ID获取用户列表",notes = "根据角色ID获取用户列表")
+    @ApiImplicitParam(name="roleId", value ="角色ID", required = true, dataType = "int", paramType = "query")
+    @GetMapping("/selectByRoleId")
+    public ResponseEntity<Response<List<User>>> selectUserByRoleId(Integer roleId){
+        log.info("根据角色ID获取用户列表");
 
-        // 新增一条记录
-        boolean result = userRoleApi.updateById(userRole);
+        // 根据信息获取角色授权表分页信息
+        List<User> userList = userRoleApi.selectUserByRoleId(roleId);
 
-        return updateResponse(result);
-    }
-
-    /**
-     * 根据信息获取用户的角色信息单个对象
-     * @param userRole 用户的角色信息
-     * @return
-     */
-    @ApiOperation(value = "根据信息获取用户的角色信息单个对象",notes = "根据信息获取用户的角色信息单个对象")
-    @GetMapping("/selectOne")
-    public ResponseEntity<Response<UserRole>> selectOne(UserRole userRole){
-        log.info("根据信息获取用户的角色信息单个对象");
-
-        // 根据信息获取用户的角色信息列表
-        UserRole entity = userRoleApi.selectOne(userRole);
-
-        return responseOk(entity);
-    }
-
-    /**
-     * 根据信息获取用户的角色信息列表
-     * @param userRole 用户的角色信息
-     * @return
-     */
-    @ApiOperation(value = "根据信息获取用户的角色信息列表",notes = "根据信息获取用户的角色信息列表")
-    @GetMapping("/select")
-    public ResponseEntity<Response<List<UserRole>>> select(UserRole userRole){
-        log.info("根据信息获取用户的角色信息列表");
-
-        // 根据信息获取用户的角色信息列表
-        List<UserRole> list = userRoleApi.select(userRole);
-
-        return responseOk(list);
-    }
-
-    /**
-     * 根据信息获取用户的角色分页信息
-     * @param userRole 用户的角色信息
-     * @param pageParamsVo 分页参数
-     * @return
-     */
-    @ApiOperation(value = "根据信息获取用户的角色信息分页信息",notes = "根据信息获取用户的角色分页信息")
-    @GetMapping("/getPage")
-    public ResponseEntity<Response<PageResultVo<UserRole>>> getPage(UserRole userRole, PageParamsVo pageParamsVo){
-        log.info("根据信息获取用户的角色分页信息");
-
-        // 根据信息获取用户的角色分页信息
-        PageResultVo<UserRole> page = userRoleApi.getPage(userRole, pageParamsVo);
-
-        return responseOk(page);
+        return responseOk(userList);
     }
 }

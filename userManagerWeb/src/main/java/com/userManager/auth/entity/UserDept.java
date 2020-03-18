@@ -4,7 +4,6 @@ import com.base.common.entity.BaseModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import java.util.Date;
 /**
  * 用户的部门
  *
@@ -14,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @ApiModel("用户的部门")
-public class UseDept extends BaseModel{
+public class UserDept extends BaseModel{
     /** 用户Id */
     @ApiModelProperty(value="用户Id")
     private Integer userId;

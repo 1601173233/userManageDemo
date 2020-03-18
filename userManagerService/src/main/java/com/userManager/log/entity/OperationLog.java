@@ -23,13 +23,13 @@ public class OperationLog extends BaseModel{
     @TableField("ID")
     private Integer id;
 
-    /** 被操作者ID */
-    @TableField("AUTH_ID")
-    private String subjectId;
-
-    /** 操作ID */
-    @TableField("USER_ID")
+    /** 操作人ID */
+    @TableField("OPERATED_ID")
     private Integer operatedId;
+
+    /** 操作信息 */
+    @TableField("MSG")
+    private String msg;
 
     /** 操作类型:详细参见字典OPERATION_TYPE */
     @TableField("OPERATION_TYPE")

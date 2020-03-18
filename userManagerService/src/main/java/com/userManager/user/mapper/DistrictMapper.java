@@ -25,11 +25,12 @@ public interface DistrictMapper extends BaseCommonMapper<District>{
     Integer getMaxSortNumByParentCode(String parentCode);
 
     /**
-     * 更新所有子节点的编码以及对应的父编码1
+     * 更新所有子节点的编码以及对应的父编码
      * @param oldParentCode 旧的父编码
      * @param newParentCode 新的父编码
      */
-    void updateSonCode(@Param("oldParentCode") String oldParentCode, @Param("newParentCode") String newParentCode);
+    void updateSonCode(@Param("oldParentCode") String oldParentCode,
+                       @Param("newParentCode") String newParentCode);
 
     /**
      * 更新所有节点的排序号

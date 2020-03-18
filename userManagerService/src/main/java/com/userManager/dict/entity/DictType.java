@@ -1,12 +1,11 @@
 package com.userManager.dict.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.base.common.entity.BaseModel;
+import com.base.common.vo.TreeVo;
+import com.userManager.dict.enums.DictNodeType;
 import lombok.Data;
+
 import java.util.Date;
 /**
  * 字典类型表
@@ -28,8 +27,8 @@ public class DictType extends BaseModel{
     private String name;
 
     /** 字典类型编码 */
-    @TableField("CODE")
-    private Integer code;
+    @TableField("DICT_TYPE")
+    private String dictType;
 
     /** 删除标志（0：未删除，1：已删除） */
     @TableLogic(value = "0", delval = "1")
@@ -51,5 +50,20 @@ public class DictType extends BaseModel{
     /** 修改人 */
     @TableField("MODIFIER")
     private Integer modifier;
+
+    /**
+     * 构造树节点
+     * @return
+     */
+    public TreeVo<Dict> convertTreeNode(){
+        TreeVo<Dict> treeVo = new TreeVo<>();
+        treeVo.setId("0"); // 默认为根节点
+        treeVo.setName(name);
+        treeVo.setParentId(null);
+        treeVo.setSortNum(0);
+        treeVo.setType(DictNodeType.DICT_TYPE.getCode().toString());
+        treeVo.setParentType(DictNodeType.DICT_TYPE.getCode().toString());
+        return treeVo;
+    }
 
 }

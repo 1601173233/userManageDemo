@@ -25,7 +25,7 @@ public interface DeptMapper extends BaseCommonMapper<Dept>{
     Integer getMaxSortNumByParentCode(String parentCode);
 
     /**
-     * 更新所有子节点的编码以及对应的父编码1
+     * 更新所有子节点的编码以及对应的父编码
      * @param oldParentCode 旧的父编码
      * @param newParentCode 新的父编码
      */
