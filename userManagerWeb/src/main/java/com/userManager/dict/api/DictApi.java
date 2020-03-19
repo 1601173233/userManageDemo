@@ -83,7 +83,6 @@ public interface DictApi{
      * @param nextNodeId 移动后当前节点后一个节点的ID，空表示当前节点为最后一个节点
      * @return
      */
-    @PutMapping(value = "/innerApi/user/dictApi/move")
     @RequestLine(value = "PUT /innerApi/dict/dictApi/move")
     boolean move(@Param("id") Integer id,
                  @Param("newParentId") Integer newParentId,

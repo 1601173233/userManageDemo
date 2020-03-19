@@ -80,7 +80,7 @@ public interface DictApi{
      * @param nextNodeId 移动后当前节点后一个节点的ID，空表示当前节点为最后一个节点
      * @return
      */
-    @PutMapping(value = "/innerApi/user/dictApi/move")
+    @PutMapping(value = "/innerApi/dict/dictApi/move")
     boolean move(@RequestPart("id") Integer id,
                  @RequestPart("newParentId") Integer newParentId,
                  @RequestPart(value = "nextNodeId", required = false) Integer nextNodeId);
@@ -90,6 +90,6 @@ public interface DictApi{
      * @param type 字典类型
      * @return
      */
-    @GetMapping(value = "/innerApi/user/dictApi/getTreeByDictType")
+    @GetMapping(value = "/innerApi/dict/dictApi/getTreeByDictType")
     TreeVo<Dict> getTreeByDictType(String type);
 }

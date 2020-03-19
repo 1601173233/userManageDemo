@@ -72,9 +72,11 @@ public class Dict extends BaseModel{
     private Integer modifier;
 
     /** 字典类型 */
+    @TableField(exist = false)
     private String dictType;
 
     /** 字典类型描述 */
+    @TableField(exist = false)
     private String dictTypeDesc;
 
     /**

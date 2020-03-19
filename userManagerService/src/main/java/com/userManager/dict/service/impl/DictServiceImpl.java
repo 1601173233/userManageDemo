@@ -153,7 +153,7 @@ public class DictServiceImpl
         TreeVo<Dict> parentTreeVo = dictType.convertTreeNode();
 
         Dict dict = new Dict();
-        dict.setDictTypeId(dict.getId());
+        dict.setDictTypeId(dictType.getId());
         List<Dict> dictList = select(dict);
         List<TreeVo<Dict>> dictTreeVoList = new ArrayList<>(dictList.size());
         for(Dict mDict : dictList){
