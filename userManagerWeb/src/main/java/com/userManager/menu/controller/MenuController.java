@@ -1,19 +1,22 @@
 package com.userManager.menu.controller;
 
-import com.userManager.menu.entity.Menu;
-import com.userManager.menu.api.MenuApi;
 import com.base.common.controller.BaseController;
+import com.base.common.validType.Insert;
+import com.base.common.validType.Update;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
 import com.base.common.vo.Response;
+import com.base.common.vo.TreeVo;
+import com.userManager.dict.entity.Dict;
+import com.userManager.menu.api.MenuApi;
+import com.userManager.menu.entity.Menu;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.base.common.validType.Insert;
-import com.base.common.validType.Update;
+
 import java.util.List;
 
 /**
@@ -148,5 +151,35 @@ public class MenuController extends BaseController {
         PageResultVo<Menu> page = menuApi.getPage(menu, pageParamsVo);
 
         return responseOk(page);
+    }
+
+    /**
+     * 节点移动到指定的父节点
+     * @param id 移动的节点ID
+     * @param newParentId 父节点ID
+     */
+    @ApiOperation(value = "节点移动到指定的父节点")
+    @PutMapping("/move")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="id", value ="移动的节点ID", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name="newParentId", value ="父节点ID", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name="nextNodeId", value ="移动后当前节点后一个节点的ID，空表示当前节点为最后一个节点", dataType = "int", paramType = "query")
+    })
+    public ResponseEntity<Response> move(Integer id, Integer newParentId, Integer nextNodeId){
+        log.info("节点移动到指定的父节点：节点{},移动到{}的最后", id, newParentId);
+        boolean result = menuApi.move(id, newParentId, nextNodeId);
+        return updateResponse(result);
+    }
+
+    /**
+     * 根据获取菜单树
+     * @return
+     */
+    @ApiOperation(value = "根据获取菜单树")
+    @GetMapping("/getTree")
+    public ResponseEntity<Response<TreeVo<Menu>>> getTree(){
+        log.info("根据获取菜单树");
+        TreeVo<Menu> treeVo = menuApi.getTree();
+        return responseOk(treeVo);
     }
 }

@@ -2,6 +2,7 @@ package com.userManager.menu.api;
 
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
+import com.base.common.vo.TreeVo;
 import com.userManager.menu.entity.Menu;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,4 +72,23 @@ public interface MenuApi{
     @GetMapping(value = "/innerApi/menu/menuApi/getPage")
     PageResultVo<Menu> getPage(@RequestPart("menu") Menu menu,
                                             @RequestPart("pageParamsVo") PageParamsVo pageParamsVo);
+
+    /**
+     * 节点移动到指定的父节点
+     * @param id 移动的节点ID
+     * @param newParentId 父节点ID
+     * @param nextNodeId 移动后当前节点后一个节点的ID，空表示当前节点为最后一个节点
+     * @return
+     */
+    @PutMapping(value = "/innerApi/menu/menuApi/move")
+    boolean move(@RequestPart("id") Integer id,
+                 @RequestPart("newParentId") Integer newParentId,
+                 @RequestPart(value = "nextNodeId", required = false) Integer nextNodeId);
+
+    /**
+     * 根据信息获取菜单树
+     * @return
+     */
+    @GetMapping(value = "/innerApi/menu/menuApi/getTree")
+    TreeVo<Menu> getTree();
 }

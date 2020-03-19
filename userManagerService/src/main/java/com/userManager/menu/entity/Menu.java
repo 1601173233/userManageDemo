@@ -1,12 +1,11 @@
 package com.userManager.menu.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.base.common.entity.BaseModel;
+import com.base.common.vo.TreeVo;
+import com.userManager.dict.enums.DictNodeType;
 import lombok.Data;
+
 import java.util.Date;
 /**
  * 菜单
@@ -68,4 +67,17 @@ public class Menu extends BaseModel{
     @TableField("MODIFIER")
     private Integer modifier;
 
+    /**
+     * 构造树节点
+     * @return
+     */
+    public TreeVo<Menu> convertTreeNode(){
+        TreeVo<Menu> treeVo = new TreeVo<>();
+        treeVo.setId(code);
+        treeVo.setName(name);
+        treeVo.setParentId(parentCode);
+        treeVo.setSortNum(sortNum);
+        treeVo.setData(this);
+        return treeVo;
+    }
 }

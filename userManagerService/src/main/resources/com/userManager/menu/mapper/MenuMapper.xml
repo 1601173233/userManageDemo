@@ -37,4 +37,31 @@
         </foreach>
         AND FLAG = ${@com.suntek.Ognl@getFalseType()}
     </select>
+
+    <select id="getMaxCodeByParentCode" parameterType="String" resultType="String">
+        SELECT MAX(CODE)
+          FROM MENU
+          WHERE PARENT_CODE = #{parentCode}
+    </select>
+
+    <select id="getMaxSortNumByParentCode" parameterType="String" resultType="Int">
+        SELECT MAX(SORT_NUM)
+          FROM MENU
+         WHERE PARENT_CODE = #{parentCode}
+    </select>
+
+    <update id="updateSonCode">
+        UPDATE MENU
+           SET CODE = CONCAT(#{newParentCode}, SUBSTRING(CODE, LENGTH(#{oldParentCode}) - LENGTH(CODE))),
+               PARENT_CODE = CONCAT(#{newParentCode}, SUBSTRING(PARENT_CODE, LENGTH(#{oldParentCode}) - LENGTH(PARENT_CODE)))
+         WHERE PARENT_CODE LIKE #{oldParentCode, typeHandler=LeftLikeHandler}
+    </update>
+
+    <update id="updateOtherNodeSort">
+        UPDATE MENU
+           SET SORT_NUM = SORT_NUM + #{increaseCount}
+         WHERE SORT_NUM >= #{startSortNum}
+  <![CDATA[AND SORT_NUM <= #{endSortNum}]]>
+           AND PARENT_CODE = #{parentCode}
+    </update>
 </mapper>

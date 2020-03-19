@@ -2,6 +2,7 @@ package com.userManager.menu.controller;
 
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
+import com.base.common.vo.TreeVo;
 import com.userManager.menu.entity.Menu;
 import com.userManager.menu.service.MenuService;
 import com.userManager.menu.api.MenuApi;
@@ -94,5 +95,15 @@ public class MenuController implements MenuApi {
         PageResultVo<Menu> page = menuService.getPage(menu, pageParamsVo);
 
         return page;
+    }
+
+    @Override
+    public boolean move(Integer id, Integer newParentId, Integer nextNodeId) {
+        return menuService.move(id, newParentId, nextNodeId);
+    }
+
+    @Override
+    public TreeVo<Menu> getTree() {
+        return menuService.getTree();
     }
 }

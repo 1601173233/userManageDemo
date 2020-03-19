@@ -1,11 +1,14 @@
 package com.userManager.menu.api;
 
-import com.userManager.menu.entity.Menu;
 import com.base.common.vo.PageParamsVo;
 import com.base.common.vo.PageResultVo;
+import com.base.common.vo.TreeVo;
+import com.userManager.dict.entity.Dict;
+import com.userManager.menu.entity.Menu;
 import feign.Param;
 import feign.RequestLine;
 import org.springframework.cloud.openfeign.FeignClient;
+
 import java.util.List;
 
 /**
@@ -72,4 +75,23 @@ public interface MenuApi{
      */
     @RequestLine(value = "GET /innerApi/menu/menuApi/getPage")
     PageResultVo<Menu> getPage(@Param("menu") Menu menu, @Param("pageParamsVo") PageParamsVo pageParamsVo);
+
+    /**
+     * 节点移动到指定的父节点
+     * @param id 移动的节点ID
+     * @param newParentId 父节点ID
+     * @param nextNodeId 移动后当前节点后一个节点的ID，空表示当前节点为最后一个节点
+     * @return
+     */
+    @RequestLine(value = "PUT /innerApi/menu/menuApi/move")
+    boolean move(@Param("id") Integer id,
+                 @Param("newParentId") Integer newParentId,
+                 @Param("nextNodeId") Integer nextNodeId);
+
+    /**
+     * 根据获取菜单树
+     * @return
+     */
+    @RequestLine(value = "GET /innerApi/menu/menuApi/getTree")
+    TreeVo<Menu> getTree();
 }
